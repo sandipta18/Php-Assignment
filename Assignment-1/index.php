@@ -7,63 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <style>
-        * {
-            padding: 0px;
-            margin: 0px;
-            background-color: #4484CE;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1170px;
-            padding: 30px 15px;
-            margin: auto;
-
-        }
-
-        form {
-            width: 450px;
-            background-color: white;
-            border: 2px solid black;
-            margin: auto;
-            padding: 30px 40px;
-            position: relative;
-            border: none;
-            border-radius: 5px;
-            background-color: white;
-            transform: translateY(125%);
-
-        }
-
-        .error {
-            color: red;
-            font-weight: bold;
-            background-color: white;
-        }
-
-        .para {
-            height: 22px;
-            width: 180px;
-            border: 1px solid grey;
-            border-radius: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            background-color: white;
-            color: white;
-        }
-
-        input {
-            border: 1.5px solid grey;
-            background-color: white;
-            padding: 3px 2px;
-        }
-        .full-name{
-            background-color:white;
-            color:black;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -148,7 +92,7 @@
     $(document).ready(function() {
 
         $(".txt").keyup(function() {
-            $(".full-name").text($(".txt1").val()+" "+$(".txt2").val());
+            $(".full-name").text($(".txt1").val()+space+$(".txt2").val());
         });
 
 

@@ -57,15 +57,35 @@
     }
     function validate_image()
     {
+
+        $target_dir = "images/";
+        $target_file = $target_dir . basename($_FILES["file"]["name"]);
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        $uploadOk = 1;
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
             $filepath = "images/" . $_FILES["file"]["name"];
 
-            if (move_uploaded_file($_FILES["file"]["tmp_name"], $filepath)){
+            if (file_exists($target_file)) {
+                echo "File already exists.";
+                $uploadOk = 0;
+            }
+
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+                echo "Only JPG, JPEG, PNG & GIF files are allowed.";
+                $uploadOk = 0;
+            }
+            if ($_FILES["file"]["size"] > 600000) {
+                echo "Use an image less than 6MB";
+                $uploadOk = 0;
+            }
+
+
+            if (move_uploaded_file($_FILES["file"]["tmp_name"], $filepath) && $uploadOk!=0){
                 echo "<img src=" . $filepath . " height=450 width=500 />";
             }
-            else {
-                echo "Error !!";
-            }
+
         }
     }
 
@@ -94,7 +114,7 @@
             <br><br>
             Select image :
             <input type="file" name="file"><br>
-            <input type="submit" name="Submit1">
+            <input type="submit" name="Submit">
             <br><br>
             <?php
             echo "Hello {$name} {$surname}";
