@@ -32,7 +32,7 @@
             }
             else{
                 $tempname = ($_POST["fname"]);
-               if (!preg_match("/^[a-zA-Z-' ]*$/",$tempname)) {
+               if (!preg_match("/[a-zA-Z-' ]*$/",$tempname)) {
                    $errname = " * Only letters and white space allowed";
                  }
                  else{
