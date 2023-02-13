@@ -13,7 +13,7 @@
 
 
 <?php
-                                                //This will keep the session active
+                                               //This will keep the session active
     session_start();                           //This will come handy when the user have entered the wrong form data
                                                //and while re entering the data in form user doesn't have to start from scratch.
     $good =0;
@@ -113,43 +113,8 @@
     }
 }
 
-function validate_email(){
-    global $erremail;
-    global $email_validated;
-    $curl = curl_init();
-    $em = $_POST["mail"];
-    curl_setopt_array($curl, array(
-
-    CURLOPT_URL => "https://api.apilayer.com/email_verification/check?email=".$em,
-    CURLOPT_HTTPHEADER => array(
-        "Content-Type: text/plain",
-        "apikey: EgFVIMYLC78KM6VD65HlOY6k5VpA0CTB"
-    ),
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => "",
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => "GET"
-    ));
-
-    $response = curl_exec($curl);
-    $validationResult = json_decode($response, true);
-    if ($validationResult['format_valid'] && $validationResult['smtp_check']) {
-        $email_validated = $em;
-    } else {
-        $erremail = " Enter email in proper format";
-    }
-    curl_close($curl);
-}
-
-
-
-
     validate_phone();
     validate_input();
-    validate_email();
 
     ?>
 
@@ -172,9 +137,8 @@ function validate_email(){
             </div>
             <br>
 
-            <input type="tel" name="mobile" placeholder="Enter Phone Number"> <span class="error" ><?php echo $errphone ?></span>
+            <input type="tel" name="mobile" placeholder="Enter Phone Number"><span class="error"><?php echo $errphone ?></span>
             <br><br>
-            <input type="text" name ="mail" placeholder = "Enter Email"> <span class = "error"><?php echo $erremail ?></span><br><br>
             Select image :
             <input type="file" name="file"><br>
             <input type="submit" name="Submit">
@@ -183,7 +147,6 @@ function validate_email(){
             if(isset($_POST["Submit"]) && $good == 1){
             echo "Hello {$name} {$surname} <br>";
             echo "Phone Number is".$number_validated;
-            echo "Email ID is".$email_validated;
             }
             ?>
         </form>
