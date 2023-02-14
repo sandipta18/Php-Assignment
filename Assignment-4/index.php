@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignment 2</title>
+    <title>Assignment 4</title>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,9 +13,7 @@
 
 
 <?php
-                                               //This will keep the session active
-    session_start();                           //This will come handy when the user have entered the wrong form data
-                                               //and while re entering the data in form user doesn't have to start from scratch.
+    session_start();
     $good =0;
     $errname = $errsurname = "";
     $name = $surname = "";
@@ -112,11 +110,29 @@
         }
     }
 }
+function validate_table()
+{
+  global $marks;
+  if (isset($_POST["Marks"])) {
 
-    validate_phone();
-    validate_input();
+    $temp = explode("\n", $_POST["Marks"]);
+    $marks = array();
+    foreach ($temp as $value) {
+      $line = explode("|", $value);
+      if ($line[0] != "") {
+        if ($line[1] > 100) {
+          $line[1] = "Incorrect input";
+        }
+        $marks[$line[0]] = $line[1];
+      }
+    }
+  }
+}
+validate_table();
+validate_phone();
+validate_input();
 
-    ?>
+?>
 
 
 
@@ -136,7 +152,7 @@
                 <span class="full-name"></span>
             </div>
             <br>
-
+            <textarea name="Marks" cols="30" rows="10" id="txt-area"></textarea><br><br>
             <input type="tel" name="mobile" placeholder="Enter Phone Number"><span class="error"><?php echo $errphone ?></span>
             <br><br>
             Select image :
@@ -160,7 +176,19 @@
 
 
 </body>
-
+<table >
+        <tr>
+          <th>Subject</th>
+          <th>Marks</th>
+        </tr>
+        <?php
+        foreach ($marks as $key => $output) { ?>
+          <tr>
+            <td> <?php echo $key; ?>
+            <td> <?php echo $output; ?>
+          </tr>
+        <?php } ?>
+</table>
 
 <script>
     var space = " ";

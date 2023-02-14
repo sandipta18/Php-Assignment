@@ -61,3 +61,6 @@ input {
     top:40px;
     text-align:center;
 }
+textarea{
+    background-color: white;
+}

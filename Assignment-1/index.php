@@ -59,10 +59,10 @@
 
     <div class="container">
         <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
-            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="First Name" id="first-name" class="txt txt1" name="fname" value="<?php echo $name; ?>">
+            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="First Name" id="first-name" class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
             <span class="error"><?php echo $errname; ?></span>
             <br> <br>
-            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Last Name" id="last-name" class="txt txt2" name="lname" value="<?php echo $surname; ?>">
+            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Last Name" id="last-name" class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
             <span class="error"><?php echo $errsurname; ?></span>
             <br> <br>
 
@@ -105,6 +105,8 @@
 
     });
 </script>
-
+<?php
+session_destroy();
+?>
 </html>
 

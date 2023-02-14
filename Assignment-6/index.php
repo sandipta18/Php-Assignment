@@ -13,6 +13,10 @@
 
 
 <?php
+    // ini_set('display_errors', 1);
+    // ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
+
                                                 //This will keep the session active
     session_start();                           //This will come handy when the user have entered the wrong form data
                                                //and while re entering the data in form user doesn't have to start from scratch.
@@ -136,12 +140,15 @@ function validate_email(){
 
     $response = curl_exec($curl);
     $validationResult = json_decode($response, true);
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(empty($_POST["mail"])){
+        $erremail = "Enter Email";
+    }
     if ($validationResult['format_valid'] && $validationResult['smtp_check']) {
         $email_validated = $em;
-    } else {
-        $erremail = " Enter email in proper format";
     }
     curl_close($curl);
+}
 }
 
 
@@ -171,10 +178,10 @@ function validate_email(){
                 <span class="full-name"></span>
             </div>
             <br>
-
-            <input type="tel" name="mobile" placeholder="Enter Phone Number"> <span class="error" ><?php echo $errphone ?></span>
+            <textarea name="Marks" cols="30" rows="10" id="txt-area"></textarea><br><br>
+            <input type="tel" name="mobile" placeholder="Enter Phone Number"> <span class="error" ><?php echo $errphone;?></span>
             <br><br>
-            <input type="text" name ="mail" placeholder = "Enter Email"> <span class = "error"><?php echo $erremail ?></span><br><br>
+            <input type="text" name ="mail" placeholder = "Enter Email"> <span class = "error"><?php echo $erremail; ?></span><br><br>
             Select image :
             <input type="file" name="file"><br>
             <input type="submit" name="Submit">
@@ -218,7 +225,6 @@ function validate_email(){
     });
 </script>
 <?php
-
-session_destroy();
+//  header("Location: pdf.php");
 ?>
 </html>

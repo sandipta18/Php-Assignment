@@ -143,15 +143,30 @@ function validate_email(){
     }
     curl_close($curl);
 }
+function validate_table()
+{
+  global $marks;
+  if (isset($_POST["Marks"])) {
 
+    $temp = explode("\n", $_POST["Marks"]);
+    $marks = array();
+    foreach ($temp as $value) {
+      $line = explode("|", $value);
+      if ($line[0] != "") {
+        if ($line[1] > 100) {
+          $line[1] = "Incorrect input";
+        }
+        $marks[$line[0]] = $line[1];
+      }
+    }
+  }
+}
+validate_table();
+validate_phone();
+validate_input();
+validate_email();
 
-
-
-    validate_phone();
-    validate_input();
-    validate_email();
-
-    ?>
+?>
 
 
 
@@ -171,7 +186,7 @@ function validate_email(){
                 <span class="full-name"></span>
             </div>
             <br>
-
+            <textarea name="Marks" cols="30" rows="10" id="txt-area"></textarea><br><br>
             <input type="tel" name="mobile" placeholder="Enter Phone Number"> <span class="error" ><?php echo $errphone ?></span>
             <br><br>
             <input type="text" name ="mail" placeholder = "Enter Email"> <span class = "error"><?php echo $erremail ?></span><br><br>
@@ -197,7 +212,19 @@ function validate_email(){
 
 
 </body>
-
+<table >
+        <tr>
+          <th>Subject</th>
+          <th>Marks</th>
+        </tr>
+        <?php
+        foreach ($marks as $key => $output) { ?>
+          <tr>
+            <td> <?php echo $key; ?>
+            <td> <?php echo $output; ?>
+          </tr>
+        <?php } ?>
+</table>
 
 <script>
     var space = " ";
