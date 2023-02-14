@@ -62,21 +62,26 @@
         $target_file = $target_dir . basename($_FILES["file"]["name"]);
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         $uploadOk = 1;
+        $check = $_POST["file"];
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $filepath = "images/" . $_FILES["file"]["name"];
+            if(empty($check)){
+                echo "No file was uploaded";
+                $uploadOk = 0;
+            }
 
-            if (file_exists($target_file)) {
+            elseif (file_exists($target_file)) {
                 echo "File already exists.";
                 $uploadOk = 0;
             }
 
-            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+            elseif($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
                 echo "Only JPG, JPEG, PNG & GIF files are allowed.";
                 $uploadOk = 0;
             }
-            if ($_FILES["file"]["size"] > 600000) {
+            elseif ($_FILES["file"]["size"] > 600000) {
                 echo "Use an image less than 6MB";
                 $uploadOk = 0;
             }
@@ -113,7 +118,7 @@
             </div>
             <br><br>
             Select image :
-            <input type="file" name="file"><br>
+            <input type="file" name="file" required><br>
             <input type="submit" name="Submit">
             <br><br>
             <?php

@@ -13,9 +13,9 @@
 
 
 <?php
-    // ini_set('display_errors', 1);
-    // ini_set('display_startup_errors', 1);
-    // error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
                                                 //This will keep the session active
     session_start();                           //This will come handy when the user have entered the wrong form data
@@ -167,10 +167,10 @@ function validate_email(){
     <div class="container">
         <form action="pdf.php" method="post" enctype="multipart/form-data">
 
-            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="First Name" id="first-name" class="txt txt1" name="fname" value="<?php echo $name; ?>">
+            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="First Name" id="first-name" class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
             <span class="error"><?php echo $errname; ?></span>
             <br> <br>
-            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Last Name" id="last-name" class="txt txt2" name="lname" value="<?php echo $surname; ?>">
+            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Last Name" id="last-name" class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
             <span class="error"><?php echo $errsurname; ?></span>
             <br> <br>
 
@@ -178,10 +178,10 @@ function validate_email(){
                 <span class="full-name"></span>
             </div>
             <br>
-            <textarea name="Marks" cols="30" rows="10" id="txt-area"></textarea><br><br>
-            <input type="tel" name="mobile" placeholder="Enter Phone Number"> <span class="error" ><?php echo $errphone;?></span>
+            <textarea name="Marks" cols="30" rows="10" id="txt-area" required></textarea><br><br>
+            <input type="tel" name="mobile" placeholder="Enter Phone Number" required> <span class="error" ><?php echo $errphone;?></span >
             <br><br>
-            <input type="text" name ="mail" placeholder = "Enter Email"> <span class = "error"><?php echo $erremail; ?></span><br><br>
+            <input type="text" name ="mail" placeholder = "Enter Email" required> <span class = "error"><?php echo $erremail; ?></span><br><br>
             Select image :
             <input type="file" name="file"><br>
             <input type="submit" name="Submit">
