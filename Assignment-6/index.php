@@ -13,9 +13,6 @@
 
 
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
 
                                                 //This will keep the session active
     session_start();                           //This will come handy when the user have entered the wrong form data
@@ -183,19 +180,10 @@ function validate_email(){
             <br><br>
             <input type="text" name ="mail" placeholder = "Enter Email" required> <span class = "error"><?php echo $erremail; ?></span><br><br>
             Select image :
-            <input type="file" name="file"><br>
+            <input type="file" name="file" required><br>
             <input type="submit" name="Submit">
             <br><br>
-            <?php
-            if(isset($_POST["Submit"]) && $good == 1){
 
-            // echo "Hello {$name} {$surname} <br>";
-            // echo "Phone Number is".$number_validated;
-            // echo "Email ID is".$email_validated;
-
-
-            }
-            ?>
         </form>
         <div class="img-container">
         <?php

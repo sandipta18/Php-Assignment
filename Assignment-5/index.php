@@ -175,10 +175,10 @@ validate_email();
     <div class="container">
         <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data">
 
-            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="First Name" id="first-name" class="txt txt1" name="fname" value="<?php echo $name; ?>">
+            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="First Name" id="first-name" class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
             <span class="error"><?php echo $errname; ?></span>
             <br> <br>
-            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Last Name" id="last-name" class="txt txt2" name="lname" value="<?php echo $surname; ?>">
+            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Last Name" id="last-name" class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
             <span class="error"><?php echo $errsurname; ?></span>
             <br> <br>
 
@@ -186,12 +186,12 @@ validate_email();
                 <span class="full-name"></span>
             </div>
             <br>
-            <textarea name="Marks" cols="30" rows="10" id="txt-area"></textarea><br><br>
-            <input type="tel" name="mobile" placeholder="Enter Phone Number"> <span class="error" ><?php echo $errphone ?></span>
+            <textarea name="Marks" cols="30" rows="10" id="txt-area" required></textarea><br><br>
+            <input type="tel" name="mobile" placeholder="Enter Phone Number" required> <span class="error" ><?php echo $errphone ?></span>
             <br><br>
-            <input type="text" name ="mail" placeholder = "Enter Email"> <span class = "error"><?php echo $erremail ?></span><br><br>
+            <input type="text" name ="mail" placeholder = "Enter Email" required> <span class = "error"><?php echo $erremail ?></span><br><br>
             Select image :
-            <input type="file" name="file"><br>
+            <input type="file" name="file" required><br>
             <input type="submit" name="Submit">
             <br><br>
             <?php
