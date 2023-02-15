@@ -180,14 +180,14 @@ function validate_email(){
             <br><br>
             <input type="text" name ="mail" placeholder = "Enter Email" required> <span class = "error"><?php echo $erremail; ?></span><br><br>
             Select image :
-            <input type="file" name="file" required><br>
+            <input type="file" name="file" ><br>
             <input type="submit" name="Submit">
             <br><br>
 
         </form>
         <div class="img-container">
         <?php
-           // validate_image();
+            validate_image();
         ?>
         </div>
 
