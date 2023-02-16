@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,71 +15,121 @@
 
 <?php
 
-                                                //This will keep the session active
-    session_start();                           //This will come handy when the user have entered the wrong form data
-                                               //and while re entering the data in form user doesn't have to start from scratch.
-    $good =0;
-    $errname = $errsurname = "";
-    $name = $surname = "";
-    $temp;
-    function validate_input()
-    {
-        global $good;
-        global $errname;
-        global $errsurname;
-        global $name;
-        global $surname;
-        global $temp;
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if (empty($_POST["fname"])) {
-                $errname = " * Name is Required";
-            }
-            else {
-                $tempname = ($_POST["fname"]);
-                    if (!preg_match("/^[a-zA-Z-' ]*$/", $tempname)) {
-                    $errname = " * Only letters and white space allowed";
-                    }
-                    else {
-                    $good = 1;
-                    $name = $tempname;
-                   }
-            }
 
-            if (empty($_POST["lname"])) {
-                $errsurname = " * Surname is Required";
-            }
-            else {
-                $tempsurname = ($_POST["lname"]);
-                if (!preg_match("/^[a-zA-Z-' ]*$/", $tempsurname)) {
-                    $errsurname = " * Only letters and white space allowed";
-                }
-                else {
-                    $surname = $tempsurname;
-                    $good = 1;
-                }
+$good = 0;
+$errname = "";
+$errsurname = "";
+$name = "";
+$surname = "";
+$temp;
+$number_validated = "";
+$email_validated = "";
+$photo = "";
+$em = "";
+$email_validated="";
+$image_upload;
+function validate_input()
+{
+    global $good;
+    global $errname;
+    global $errsurname;
+    global $name;
+    global $surname;
+    global $temp;
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (empty($_POST["fname"])) {
+            $errname = " * Name is Required";
+            $good = 0;
+        } else {
+            $tempname = ($_POST["fname"]);
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $tempname)) {
+                $errname = " * Only letters and white space allowed";
+                $good = 0;
+            } else {
+                $good = 1;
+                $name = $tempname;
             }
         }
-    }
-  
 
-    function validate_phone(){
-        global $number_validated;
-        global $errphone;
-        if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        $number = $_POST["mobile"];
-        if(preg_match("/^[+91]{3}[0-9]{10}$/", $number)){
-            $number_validated = $number;
-            $good = 1;
-        }
-        else {
-            $errphone = " Enter Number in valid format";
+        if (empty($_POST["lname"])) {
+            $errsurname = " * Surname is Required";
+            $good = 0;
+        } else {
+            $tempsurname = ($_POST["lname"]);
+            if (!preg_match("/^[a-zA-Z-' ]*$/", $tempsurname)) {
+                $errsurname = " * Only letters and white space allowed";
+                $good = 0;
+            } else {
+                $surname = $tempsurname;
+                $good = 1;
+            }
         }
     }
 }
 
+
+
+
+$imagename = $_FILES['image']['name'];
+$imagepath = $_FILES['image']['full_path'];
+
+$tempname = $_FILES['image']['tmp_name'];
+$imagesize = $_FILES['image']['size'];
+$errimage = "";
+function validate_image($imagename, $tempname)
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    global $good;
+    global $imagesize;
+    global $imagetype;
+    global $errimage;
+    global $tempname;
+    global $imagename;
+     // $uploadOk = 1;
+    if(!$imagename){
+        $errimage =  "Enter an image to proceed";
+        $good = 0;
+    }
+    else if($imagesize>6000000){
+        $errimage =  "Enter image less than 6MB";
+        $good = 0;
+    }
+
+    elseif($imagename!=0) {
+        $good = 1;
+        $path = "images/" . $imagename;
+        move_uploaded_file($tempname, $path);
+        $_SESSION['uploadedImage'] = $path;
+
+
+    }
+}
+
+}
+
+function validate_phone()
+{
+    global $number_validated;
+    global $errphone;
+    global $good;
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $number = $_POST["mobile"];
+        if (preg_match("/^[+91]{3}[0-9]{10}$/", $number)) {
+            $number_validated = $number;
+            $good = 1;
+        } else {
+            $errphone = " Enter Number in valid format";
+            $good = 0;
+        }
+    }
+}
+
+
 function validate_email(){
     global $erremail;
     global $email_validated;
+    global $em;
     $curl = curl_init();
     $em = $_POST["mail"];
     curl_setopt_array($curl, array(
@@ -86,7 +137,7 @@ function validate_email(){
     CURLOPT_URL => "https://api.apilayer.com/email_verification/check?email=".$em,
     CURLOPT_HTTPHEADER => array(
         "Content-Type: text/plain",
-        "apikey: EgFVIMYLC78KM6VD65HlOY6k5VpA0CTB"
+        "apikey: 6lqXAXAXlgwac06C28c0iHsgZn47lrCy"
     ),
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
@@ -113,18 +164,20 @@ function validate_email(){
 
 
 
-    validate_phone();
-    validate_input();
-    validate_email();
 
-    ?>
+validate_phone();
+validate_input();
+validate_image($imagename, $tempname);
+validate_email();
+
+?>
 
 
 
 <body>
 
     <div class="container">
-        <form action="pdf.php" method="post" enctype="multipart/form-data">
+        <form action="index.php" method="POST" enctype="multipart/form-data">
 
             <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="First Name" id="first-name" class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
             <span class="error"><?php echo $errname; ?></span>
@@ -137,20 +190,18 @@ function validate_email(){
                 <span class="full-name"></span>
             </div>
             <br>
-            <textarea name="Marks" cols="30" rows="10" id="txt-area" required></textarea><br><br>
-            <input type="tel" name="mobile" placeholder="Enter Phone Number" required> <span class="error" ><?php echo $errphone;?></span >
+            <textarea name="Marks" cols="30" rows="10" id="txt-area" ></textarea><br><br>
+            <input type="tel" name="mobile" placeholder="Enter Phone Number" > <span class="error"><?php echo $errphone; ?></span>
             <br><br>
-            <input type="text" name ="mail" placeholder = "Enter Email" required> <span class = "error"><?php echo $erremail; ?></span><br><br>
+            <input type="text" name="mail" placeholder="Enter Email" > <span class="error" ><?php echo $erremail; ?></span><br><br>
             Select image :
-            <input type="file" name="file" ><br>
+            <input type="file" name="image"><br><span class="error"><?php echo $errimage; ?></span><br><br>
             <input type="submit" name="Submit">
             <br><br>
 
         </form>
         <div class="img-container">
-        <?php
-            validate_image();
-        ?>
+
         </div>
 
     </div>
@@ -175,6 +226,15 @@ function validate_email(){
     });
 </script>
 <?php
-//  header("Location: pdf.php");
+$_SESSION["fname"] = $name;
+$_SESSION["lname"] = $surname;
+$_SESSION["mobile"] = $number_validated;
+$_SESSION["mail"] = $email_validated;
+$_SESSION["Marks"] = $_POST["Marks"];
+
+if ($good == 1) {
+    header("Location:pdf.php");
+}
 ?>
+
 </html>

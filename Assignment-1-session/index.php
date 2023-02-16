@@ -131,9 +131,6 @@ if($good == 1){
 
 
 header('Location:action.php');
-// echo $_SESSION['firstname'];
-// echo $_SESSION['surname'];
 }
 ?>
 </html>
-
