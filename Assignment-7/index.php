@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
 <body>
     <?php
 
-    session_start();
+
     $errorname = "";
     $errorpassword = "";
     $user_name=$_POST["Name"];

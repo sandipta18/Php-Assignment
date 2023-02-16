@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,12 +59,17 @@
         </a>
 
       </div>
+      <br>
+      <form action="query.php" method="POST">
+      <input type="tel" name="query" placeholder="query" required><br>
+      <input type="submit" name="" value="Submit"><br><br>
+      </form>
+      <a href="logout.php">Logout</a>
     </div>
 
   </div>
 </div>
+
 </body>
-<?php
-session_destroy();
-?>
+
 </html>

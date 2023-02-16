@@ -89,9 +89,12 @@ function validate_table()
     $marks = array();
     foreach ($temp as $value) {
       $line = explode("|", $value);
-      if ($line[0] != "") {
+      if ($line[0] != "" && $line[1] != "") {
         if ($line[1] > 100) {
           $line[1] = "Incorrect input";
+        }
+        elseif(is_numeric($line[0])){
+          $line[0] = "Incorrect Input";
         }
         $marks[$line[0]] = $line[1];
       }
@@ -123,7 +126,7 @@ validate_input();
       <br><br>
       <textarea name="Marks" cols="30" rows="10" id="txt-area" required> </textarea><br>
       Select image :
-      <input type="file" name="file" required><br>
+      <input type="file" name="file" ><br>
       <input type="submit" name="Submit">
       <br><br>
       <?php

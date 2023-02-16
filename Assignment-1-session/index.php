@@ -1,3 +1,9 @@
+<?php
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,22 +19,25 @@
 <body>
     <?php
                                                    //This will keep the session active
-        session_start();                           //This will come handy when the user have entered the wrong form data
+                                  //This will come handy when the user have entered the wrong form data
                                                    //and while re entering the data in form user doesn't have to start from scratch.
-
+                                                   ini_set('display_errors', 1);
+                                                   ini_set('display_startup_errors', 1);
+                                                   error_reporting(E_ALL);
     $errname = "";
     $errsurname = "";
     $name = "";
     $surname = "";
     $temp;
     $good = 0;
+    $first_name= "";
+    $sur_name = "";
     function validate()
     {
         global $errname;
         global $errsurname;
         global $name;
         global $surname;
-        global $temp;
         global $good;
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (empty($_POST["fname"])) {
@@ -71,10 +80,10 @@
 
     <div class="container">
         <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
-            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="First Name" id="first-name" class="txt txt1" name="fname" value="<?php echo $name; ?>" >
+            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="First Name" id="first-name" class="txt txt1" name="fname" required value="<?php echo $name; ?>" >
             <span class="error"><?php echo $errname; ?></span>
             <br> <br>
-            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Last Name" id="last-name" class="txt txt2" name="lname" value="<?php echo $surname; ?>" >
+            <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Last Name" id="last-name" class="txt txt2" name="lname" required value="<?php echo $surname; ?>" >
             <span class="error"><?php echo $errsurname; ?></span>
             <br> <br>
 
@@ -86,9 +95,6 @@
             <input type="submit" class="submit">
             <br><br>
 
-            <!-- <?php
-                echo "Hello {$name} {$surname}";
-            ?> -->
 
 
         </form>
@@ -118,11 +124,17 @@
     });
 </script>
 <?php
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+validate();
 if($good == 1){
-$_SESSION["first_name"] = $name;
+$_SESSION['first_name'] = $name;
 $_SESSION["sur_name"] = $surname;
 header("Location:action.php");
 }
+}
+
+
 ?>
 </html>
 

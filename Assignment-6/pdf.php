@@ -40,9 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $file = 'ksi.pdf';
-    $pdf->Output($file, 'D');
+    $pdf->Output($file, 'I');
 }
 
 
 
 session_destroy();
+
+?>
