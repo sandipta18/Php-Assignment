@@ -35,7 +35,7 @@ input:focus {
   <div class="stage" id="page1">
     <div class="middled">
 
-      <h2>Welcome</h2>
+      <h2>Welcome User</h2>
       <div class="link-1">
         <a href="../Assignment-1/index.php">
           <span class="thin">Task</span><span class="thick">~1</span>
