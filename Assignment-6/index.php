@@ -130,6 +130,7 @@ function validate_email(){
     global $erremail;
     global $email_validated;
     global $em;
+    global $good;
     $curl = curl_init();
     $em = $_POST["mail"];
     curl_setopt_array($curl, array(
@@ -153,9 +154,15 @@ function validate_email(){
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($_POST["mail"])){
         $erremail = "Enter Email";
+        $good = 0;
+    }
+    if (!$validationResult['format_valid'] && !$validationResult['smtp_check']) {
+        $erremail = "Enter email in proper format";
+        $good = 0;
     }
     if ($validationResult['format_valid'] && $validationResult['smtp_check']) {
         $email_validated = $em;
+        $good = 1;
     }
     curl_close($curl);
 }

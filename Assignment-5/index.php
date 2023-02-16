@@ -136,12 +136,14 @@ function validate_email(){
 
     $response = curl_exec($curl);
     $validationResult = json_decode($response, true);
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
     if ($validationResult['format_valid'] && $validationResult['smtp_check']) {
         $email_validated = $em;
     } else {
         $erremail = " Enter email in proper format";
     }
     curl_close($curl);
+}
 }
 function validate_table()
 {

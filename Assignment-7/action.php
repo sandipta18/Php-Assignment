@@ -36,7 +36,6 @@ input:focus {
     <div class="middled">
 
       <h2>Welcome</h2>
-      <?php $_SESSION['name']; ?>
       <div class="link-1">
         <a href="../Assignment-1/index.php">
           <span class="thin">Task</span><span class="thick">~1</span>
@@ -74,7 +73,7 @@ input:focus {
       </div>
 
       <div class="link-7">
-        <a href="../Assignment-5/index.php">
+        <a href="../Assignment-6/index.php">
           <span class="thin">Task</span><span class="thick">~6</span>
         </a>
 
@@ -88,7 +87,6 @@ input:focus {
       <br>
       <form action="query.php" method="GET">
       <input type="tel" name="query" placeholder=" Query" required><br>
-      <?php  $_SESSION['error']; ?>
       <input type="submit" name="" value="Submit"><br><br>
       </form>
       <a href="logout.php">Logout</a>
