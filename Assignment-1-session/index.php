@@ -2,6 +2,7 @@
 session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
+//ini_set(' session.save_path','SOME WRITABLE PATH');
 error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
@@ -18,12 +19,10 @@ error_reporting(E_ALL);
 
 <body>
     <?php
-                                                   //This will keep the session active
-                                  //This will come handy when the user have entered the wrong form data
-                                                   //and while re entering the data in form user doesn't have to start from scratch.
-                                                   ini_set('display_errors', 1);
-                                                   ini_set('display_startup_errors', 1);
-                                                   error_reporting(E_ALL);
+
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     $errname = "";
     $errsurname = "";
     $name = "";
@@ -53,6 +52,8 @@ error_reporting(E_ALL);
                  else{
                    $name = $tempname;
                    $good = 1;
+                   $_SESSION['firstname'] = $name;
+
                  }
            }
 
@@ -69,6 +70,7 @@ error_reporting(E_ALL);
                 else{
                   $surname = $tempsurname;
                   $good = 1;
+                  $_SESSION['surname'] = $surname;
                 }
            }
 
@@ -125,16 +127,13 @@ error_reporting(E_ALL);
 </script>
 <?php
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-validate();
 if($good == 1){
-$_SESSION['first_name'] = $name;
-$_SESSION["sur_name"] = $surname;
-header("Location:action.php");
-}
-}
 
 
+header('Location:action.php');
+// echo $_SESSION['firstname'];
+// echo $_SESSION['surname'];
+}
 ?>
 </html>
 

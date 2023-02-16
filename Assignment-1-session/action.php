@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-echo "Hello"." ".$_SESSION["first_name"]." ".$_SESSION["sur_name"];
+echo $_SESSION['firstname'].$_SESSION['surname'];
 
 
 

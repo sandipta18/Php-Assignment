@@ -89,7 +89,7 @@
           <?php echo $_SESSION['error']; ?>
           <input type="submit" name="" value="Submit"><br><br>
         </form>
-        <a href="logout.php">Logout</a>
+
       </div>
 
     </div>
