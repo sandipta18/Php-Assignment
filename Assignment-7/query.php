@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if($_SERVER['REQUEST_METHOD']=="POST"){
+if($_SERVER['REQUEST_METHOD']=="GET"){
 
-    $page = $_POST['query'];
+    $page = $_GET['query'];
     if($page ==1 ){
       header('Location: ../Assignment-1/index.php');
     }

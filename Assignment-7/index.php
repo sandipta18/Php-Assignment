@@ -32,7 +32,8 @@
         if($password!="innoraft"){
             $errorpassword="Enter Password Correctly";
         }
-        if($user_name=="sandipta" && $password=="innoraft"){
+        if($user_name==="sandipta18" && $password==="admin"){
+            $_SESSION['name'] = $_POST['Name'];
             header("Location:action.php");
         }
 
