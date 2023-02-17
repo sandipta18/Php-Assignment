@@ -14,7 +14,7 @@ session_start();
 </head>
 <body>
 <form action="forgot.php" method="POST">
-<p>Password Recover Window</p>
+<p>Password Recovery Window</p>
 <input type="text" name="name" placeholder="Enter User Name"><br><br>
 <input type="submit"><br><br>
 <a href="index.php">Go back</a>

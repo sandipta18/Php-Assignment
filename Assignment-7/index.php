@@ -60,6 +60,7 @@
     </div>
   </div>
 </body>
+<!-- if forgot password option is clicked then it will redirect to an window where we can reset the password -->
 <script>
   var space = " ";
   $(document).ready(function () {

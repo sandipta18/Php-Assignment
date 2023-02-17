@@ -6,10 +6,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assignment 2</title>
+  <title>Assignment 3 oops</title>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"
     integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
+  <style>
+    textarea{
+      background-color: white;
+    }
+
+  </style>
 </head>
 
 
@@ -96,8 +102,32 @@ function validate_image()
 }
 }
 
+?>
 
+<?php
+class Table{
+public function validate_table()
+{
+  global $marks;
+  if (isset($_POST["Marks"])) {
 
+    $temp = explode("\n", $_POST["Marks"]);
+    $marks = array();
+    foreach ($temp as $value) {
+      $line = explode("|", $value);
+      if ($line[0] != "" && $line[1] != "") {
+        if ($line[1] > 100) {
+          $line[1] = "Incorrect input";
+        } elseif (is_numeric($line[0])) {
+          $line[0] = "Incorrect Input";
+        }
+        $marks[$line[0]] = $line[1];
+      }
+    }
+  }
+  return $marks;
+}
+}
 ?>
 
 <?php
@@ -112,6 +142,12 @@ function validate_image()
     $obj2 = new Image();
 
   }
+?>
+<?php
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $obj3 = new Table();
+    $marks = $obj3->validate_table();
+}
 ?>
 <!-- body section -->
 
@@ -137,6 +173,7 @@ function validate_image()
         <span class="full-name"></span>
       </div>
       <br><br>
+      <textarea name="Marks" cols="30" rows="10" id="txt-area" required> </textarea><br><br>
       Select image :
       <input type="file" name="file" required><br>
       <input type="submit" name="Submit">
@@ -160,6 +197,21 @@ function validate_image()
 
 
 </body>
+<table>
+  <tr>
+    <th>Subject</th>
+    <th>Marks</th>
+  </tr>
+  <?php
+  foreach ($marks as $key => $output) { ?>
+    <tr>
+      <td>
+        <?php echo $key; ?>
+      <td>
+        <?php echo $output; ?>
+    </tr>
+  <?php } ?>
+</table>
 
 <!-- used jquery to facilitate the following things -->
 <!-- User won't ba able to enter numeric value in the name field -->
@@ -188,7 +240,7 @@ function validate_image()
   });
 </script>
 <?php
-//session_destroy();
+session_destroy();
 ?>
 
 </html>
