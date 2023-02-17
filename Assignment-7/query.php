@@ -1,9 +1,10 @@
+<!-- this will redirect user on the basis of query value entered by user like [?q=] -->
 <?php
 session_start();
 
 if($_SERVER['REQUEST_METHOD']=="GET"){
 
-    $page = $_GET['query'];
+    $page = $_GET['q'];
     if($page ==1 ){
       header('Location: ../Assignment-1/index.php');
     }

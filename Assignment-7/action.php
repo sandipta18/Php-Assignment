@@ -1,3 +1,5 @@
+
+<!-- If login is successfull this page will open -->
 <?php session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -30,7 +32,7 @@ input:focus {
 </head>
 
 <body>
-
+  <!-- This section will help to redirect user to the desired location -->
     <div class="wrapper tabled">
   <div class="stage" id="page1">
     <div class="middled">
@@ -85,8 +87,9 @@ input:focus {
 
       </div>
       <br>
+      <!-- Will take query input from user and redirect accordingly -->
       <form action="query.php" method="GET">
-      <input type="tel" name="query" placeholder=" Query" required><br>
+      <input type="tel" name="q" placeholder=" Query" required><br>
       <input type="submit" name="" value="Submit"><br><br>
       </form>
       <a href="logout.php">Logout</a>

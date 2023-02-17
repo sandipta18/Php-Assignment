@@ -12,7 +12,7 @@ error_reporting(E_ALL);
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Assignment-1-session</title>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"
     integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
@@ -21,11 +21,9 @@ error_reporting(E_ALL);
 <body>
   <?php
 
-  ini_set('display_errors', 1);
-  ini_set('display_startup_errors', 1);
-  error_reporting(E_ALL);
-  $errname = "";
-  $errsurname = "";
+
+  $errorname = "";
+  $errorsurname = "";
   $name = "";
   $surname = "";
   $temp;
@@ -34,19 +32,19 @@ error_reporting(E_ALL);
   $sur_name = "";
   function validate()
   {
-    global $errname;
-    global $errsurname;
+    global $errorname;
+    global $errorsurname;
     global $name;
     global $surname;
     global $good;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (empty($_POST["fname"])) {
-        $errname = " * Name is Required";
+        $errorname = " * Name is Required";
         $good = 0;
       } else {
         $tempname = ($_POST["fname"]);
         if (!preg_match("/[a-zA-Z-' ]*$/", $tempname)) {
-          $errname = " * Only letters and white space allowed";
+          $errorname = " * Only letters and white space allowed";
           $good = 0;
         } else {
           $name = $tempname;
@@ -57,12 +55,12 @@ error_reporting(E_ALL);
       }
 
       if (empty($_POST["lname"])) {
-        $errsurname = " * Surname is Required";
+        $errorsurname = " * Surname is Required";
         $good = 0;
       } else {
         $tempsurname = ($_POST["lname"]);
         if (!preg_match("/^[a-zA-Z-' ]*$/", $tempsurname)) {
-          $errsurname = " * Only letters and white space allowed";
+          $errorsurname = " * Only letters and white space allowed";
           $good = 0;
         } else {
           $surname = $tempsurname;
@@ -82,13 +80,13 @@ error_reporting(E_ALL);
       <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" required value="<?php echo $name; ?>">
       <span class="error">
-        <?php echo $errname; ?>
+        <?php echo $errorname; ?>
       </span>
       <br> <br>
       <input type="text" placeholder="Last Name" id="last-name"
         class="txt txt2" name="lname" required value="<?php echo $surname; ?>">
       <span class="error">
-        <?php echo $errsurname; ?>
+        <?php echo $errorsurname; ?>
       </span>
       <br> <br>
 
@@ -109,7 +107,11 @@ error_reporting(E_ALL);
 
 </body>
 
-
+<!-- used jquery to facilitate the following things -->
+<!-- User won't ba able to enter numeric value in the name field -->
+<!-- Enabled the live capturing of first name and last name and displayed them as full name -->
+<!-- If user have enterd wrong information and en error is being displayed, upon clicking the input field -->
+<!-- the error will disappear -->
 <script>
   var space = " ";
   $(document).ready(function () {

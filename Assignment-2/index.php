@@ -14,47 +14,50 @@
 
 
 <?php
-//This will keep the session active
-session_start(); //This will come handy when the user have entered the wrong form data
-//and while re entering the data in form user doesn't have to start from scratch.
+                                                    //This will keep the session active
+session_start();                                    //This will come handy when the user have entered the wrong form data
+                                                    //and while re entering the data in form user doesn't have to start from scratch.
 
-$errname = $errsurname = "";
+$errorname = $errorsurname = "";
 $name = $surname = "";
 $temp;
+
+//This function will be used to validate the input taken from the user
 function validate_input()
 {
-  global $errname;
-  global $errsurname;
+  global $errorname;
+  global $errorsurname;
   global $name;
   global $surname;
   global $temp;
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["fname"])) {
-      $errname = " * Name is Required";
+      $errorname = " * Name is Required";
     } else {
       $tempname = ($_POST["fname"]);
       if (!preg_match("/^[a-zA-Z-' ]*$/", $tempname)) {
-        $errname = " * Only letters and white space allowed";
+        $errorname = " * Only letters and white space allowed";
       } else {
         $name = $tempname;
       }
     }
 
     if (empty($_POST["lname"])) {
-      $errsurname = " * Surname is Required";
+      $errorsurname = " * Surname is Required";
     } else {
       $tempsurname = ($_POST["lname"]);
       if (!preg_match("/^[a-zA-Z-' ]*$/", $tempsurname)) {
-        $errsurname = " * Only letters and white space allowed";
+        $errorsurname = " * Only letters and white space allowed";
       } else {
         $surname = $tempsurname;
       }
     }
   }
 }
+
+ //This function will be used to validate the image taken as input from the user
 function validate_image()
 {
-
   $target_dir = "images/";
   $target_file = $target_dir . basename($_FILES["file"]["name"]);
   $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -92,7 +95,7 @@ validate_input();
 ?>
 
 
-
+<!-- body section -->
 <body>
 
   <div class="container">
@@ -101,13 +104,13 @@ validate_input();
       <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
       <span class="error">
-        <?php echo $errname; ?>
+        <?php echo $errorname; ?>
       </span>
       <br> <br>
       <input type="text" placeholder="Last Name" id="last-name"
         class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
       <span class="error">
-        <?php echo $errsurname; ?>
+        <?php echo $errorsurname; ?>
       </span>
       <br> <br>
 
@@ -134,7 +137,11 @@ validate_input();
 
 </body>
 
-
+<!-- used jquery to facilitate the following things -->
+<!-- User won't ba able to enter numeric value in the name field -->
+<!-- Enabled the live capturing of first name and last name and displayed them as full name -->
+<!-- If user have enterd wrong information and en error is being displayed, upon clicking the input field -->
+<!-- the error will disappear -->
 <script>
   var space = " ";
   $(document).ready(function () {

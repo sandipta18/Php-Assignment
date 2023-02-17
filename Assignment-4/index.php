@@ -16,24 +16,26 @@
 <?php
 session_start();
 $good = 0;
-$errname = $errsurname = "";
+$errorname = $errorsurname = "";
 $name = $surname = "";
 $temp;
+
+//This function will be used to validate text input taken from user
 function validate_input()
 {
   global $good;
-  global $errname;
-  global $errsurname;
+  global $errorname;
+  global $errorsurname;
   global $name;
   global $surname;
   global $temp;
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["fname"])) {
-      $errname = " * Name is Required";
+      $errorname = " * Name is Required";
     } else {
       $tempname = ($_POST["fname"]);
       if (!preg_match("/^[a-zA-Z-' ]*$/", $tempname)) {
-        $errname = " * Only letters and white space allowed";
+        $errorname = " * Only letters and white space allowed";
       } else {
         $good = 1;
         $name = $tempname;
@@ -41,11 +43,11 @@ function validate_input()
     }
 
     if (empty($_POST["lname"])) {
-      $errsurname = " * Surname is Required";
+      $errorsurname = " * Surname is Required";
     } else {
       $tempsurname = ($_POST["lname"]);
       if (!preg_match("/^[a-zA-Z-' ]*$/", $tempsurname)) {
-        $errsurname = " * Only letters and white space allowed";
+        $errorsurname = " * Only letters and white space allowed";
       } else {
         $surname = $tempsurname;
         $good = 1;
@@ -53,6 +55,8 @@ function validate_input()
     }
   }
 }
+
+//This function will be used for validating image input taken from user
 function validate_image()
 {
   global $good;
@@ -92,7 +96,7 @@ function validate_image()
 
   }
 }
-
+//This function will be use to validate phone number input taken from user
 function validate_phone()
 {
   global $number_validated;
@@ -107,6 +111,7 @@ function validate_phone()
     }
   }
 }
+//This function will be used to validate text area input taken from user
 function validate_table()
 {
   global $marks;
@@ -132,7 +137,7 @@ validate_input();
 ?>
 
 
-
+<!-- Content -->
 <body>
 
   <div class="container">
@@ -141,13 +146,13 @@ validate_input();
       <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
       <span class="error">
-        <?php echo $errname; ?>
+        <?php echo $errorname; ?>
       </span>
       <br> <br>
       <input type="text" placeholder="Last Name" id="last-name"
         class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
       <span class="error">
-        <?php echo $errsurname; ?>
+        <?php echo $errorsurname; ?>
       </span>
       <br> <br>
 
@@ -181,6 +186,7 @@ validate_input();
 
 
 </body>
+<!-- This will be used to print the  input from text area in form of a table -->
 <table>
   <tr>
     <th>Subject</th>
@@ -197,6 +203,12 @@ validate_input();
   <?php } ?>
 </table>
 
+
+<!-- used jquery to facilitate the following things -->
+<!-- User won't ba able to enter numeric value in the name field -->
+<!-- Enabled the live capturing of first name and last name and displayed them as full name -->
+<!-- If user have enterd wrong information and en error is being displayed, upon clicking the input field -->
+<!-- the error will disappear -->
 <script>
   var space = " ";
   $(document).ready(function () {

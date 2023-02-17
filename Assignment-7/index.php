@@ -1,3 +1,4 @@
+<!-- This is basically the login page -->
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -6,14 +7,15 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Assignment 7</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <?php
 
-
+  //This is checking whether the username and passowrd is empty or not 
+  //and will check if the username and passowrd is correct or not
   $errorname = "";
   $errorpassword = "";
   $user_name = $_POST["Name"];
@@ -41,6 +43,7 @@
 
   }
   ?>
+  <!-- content -->
   <div class="container flex-wrapper">
     <div class="form-section flex-wrapper -vertical">
       <form action="index.php" class="flex-wrapper -vertical" method="POST">
