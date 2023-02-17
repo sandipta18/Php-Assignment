@@ -8,13 +8,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Assignment 7</title>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <?php
 
-  //This is checking whether the username and passowrd is empty or not 
+  //This is checking whether the username and passowrd is empty or not
   //and will check if the username and passowrd is correct or not
   $errorname = "";
   $errorpassword = "";
@@ -54,9 +55,23 @@
           <?php echo $errorpassword; ?>
         </span><br>
         <input type="submit" placeholder="Login" class="box-submit" name="submit">
+        <input type="submit" value="    Forgot Password" class="box" name="forgot" class="fp">
       </form>
     </div>
   </div>
 </body>
+<script>
+  var space = " ";
+  $(document).ready(function () {
 
+    $(".fp").click(function(){
+      <?php
+      if(isset($_POST["forgot"])){
+       header("Location:forgot.php");
+      }
+      ?>
+    });
+
+  });
+</script>
 </html>
