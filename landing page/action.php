@@ -85,8 +85,8 @@
         </div>
         <br>
         <form action="query.php" method="POST">
-          <input type="tel" name="query" placeholder=" Query" required><br>
-          <?php echo $_SESSION['error']; ?>
+          <input type="tel" name="q" placeholder=" Query" required><br>
+
           <input type="submit" name="" value="Submit"><br><br>
         </form>
 

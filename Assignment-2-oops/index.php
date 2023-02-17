@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,48 +15,53 @@
 
 
 <?php
-                                                    //This will keep the session active
-session_start();                                    //This will come handy when the user have entered the wrong form data
-                                                    //and while re entering the data in form user doesn't have to start from scratch.
+//This will keep the session active
+ //This will come handy when the user have entered the wrong form data
+//and while re entering the data in form user doesn't have to start from scratch.
 
-$errorname = $errorsurname = "";
-$name = $surname = "";
-$temp;
-
-//This function will be used to validate the input taken from the user
-function validate_input()
+class Name
 {
-  global $errorname;
-  global $errorsurname;
-  global $name;
-  global $surname;
-  global $temp;
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST["fname"])) {
-      $errorname = " * Name is Required";
-    } else {
-      $tempname = ($_POST["fname"]);
-      if (!preg_match("/^[a-zA-Z-' ]*$/", $tempname)) {
-        $errorname = " * Only letters and white space allowed";
-      } else {
-        $name = $tempname;
-      }
-    }
 
-    if (empty($_POST["lname"])) {
-      $errorsurname = " * Surname is Required";
-    } else {
-      $tempsurname = ($_POST["lname"]);
-      if (!preg_match("/^[a-zA-Z-' ]*$/", $tempsurname)) {
-        $errorsurname = " * Only letters and white space allowed";
+
+  public function validate()
+  {
+    global $errorname;
+    global $errorsurname;
+    global $name;
+    global $surname;
+    global $temp;
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      if (empty($_POST["fname"])) {
+        $errorname = " * Name is Required";
       } else {
-        $surname = $tempsurname;
+        $tempname = ($_POST["fname"]);
+        if (!preg_match("/[a-zA-Z-' ]*$/", $tempname)) {
+          $errorname = " * Only letters and white space allowed";
+        } else {
+          $name = $tempname;
+        }
+      }
+
+      if (empty($_POST["lname"])) {
+        $errorsurname = " * Surname is Required";
+      } else {
+        $tempsurname = ($_POST["lname"]);
+        if (!preg_match("/^[a-zA-Z-' ]*$/", $tempsurname)) {
+          $errorsurname = " * Only letters and white space allowed";
+        } else {
+          $surname = $tempsurname;
+        }
       }
     }
+    $arr = array($name, $surname, $errorname, $errorsurname); //storing the data in an array that can be used to display
+    //name/surname or errorname/error surname
+    return $arr;
   }
 }
-
- //This function will be used to validate the image taken as input from the user
+?>
+<!-- This function will be used to validate the image taken as input from the user -->
+<?php
+class Image{
 function validate_image()
 {
   $target_dir = "images/";
@@ -88,29 +94,42 @@ function validate_image()
 
   }
 }
+}
 
 
-validate_input();
 
 ?>
 
+<?php
+  if ($_SERVER['REQUEST_METHOD'] == "POST") {     //Created an object to call the function inside it for validation
+    $obj = new Name();
+    $temp = $obj->validate();
+  }
 
+?>
+<?php
+  if ($_SERVER['REQUEST_METHOD'] == "POST") {     //Created an object to call the function inside it for validation
+    $obj2 = new Image();
+
+  }
+?>
 <!-- body section -->
+
 <body>
 
   <div class="container">
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data">
 
-      <input type="text" placeholder="First Name" id="first-name"
-        class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
+      <input type="text" placeholder="First Name" id="first-name" class="txt txt1" name="fname"
+        value="<?php echo $name; ?>" required>
       <span class="error">
-        <?php echo $errorname; ?>
+      <?php echo $temp[2]; ?>
       </span>
       <br> <br>
-      <input type="text" placeholder="Last Name" id="last-name"
-        class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
+      <input type="text" placeholder="Last Name" id="last-name" class="txt txt2" name="lname"
+        value="<?php echo $surname; ?>" required>
       <span class="error">
-        <?php echo $errorsurname; ?>
+      <?php echo $temp[3]; ?>
       </span>
       <br> <br>
 
@@ -123,16 +142,18 @@ validate_input();
       <input type="submit" name="Submit">
       <br><br>
       <?php
-      if($_SERVER["REQUEST_METHOD"]=="POST"){
-        echo "Hello {$name} {$surname}";
+      if ($_SERVER['REQUEST_METHOD'] == "POST")  {            //displaying the output
+        echo "Hello " . $temp[0] . " " . $temp[1];
       }
-
       ?>
     </form>
     <div class="img-container">
       <?php
-      validate_image();
+       if ($_SERVER['REQUEST_METHOD'] == "POST")  {            //displaying the output
+        $obj2->validate_image();
+      }
       ?>
+
     </div>
 
   </div>
@@ -158,16 +179,16 @@ validate_input();
       $(".error").hide();
     });
 
-    $("#first-name").keydown(function() {
+    $("#first-name").keydown(function () {
       return /[a-z]/i.test(event.key);
     });
-    $("#last-name").keydown(function() {
+    $("#last-name").keydown(function () {
       return /[a-z]/i.test(event.key);
     });
   });
 </script>
 <?php
-session_destroy();
+//session_destroy();
 ?>
 
 </html>

@@ -4,7 +4,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-  $page = $_POST['query'];
+  $page = $_POST['q'];
   if ($page == 1) {
     header('Location: ../Assignment-1/index.php');
   } elseif ($page == 2) {

@@ -81,7 +81,8 @@
       <br><br>
 
       <?php
-      echo "Hello {$name} {$surname}";
+      if($_SERVER["REQUEST_METHOD"]=="POST"){
+      echo "Hello {$name} {$surname}";}
       ?>
 
 
