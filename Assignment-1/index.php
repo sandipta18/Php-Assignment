@@ -16,7 +16,7 @@
   //This will keep the session active
   session_start(); //This will come handy when the user have entered the wrong form data
   //and while re entering the data in form user doesn't have to start from scratch.
-  
+
   $errname = $errsurname = "";
   $name = $surname = "";
   $temp;
@@ -56,13 +56,13 @@
 
   <div class="container">
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
-      <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="First Name" id="first-name"
+      <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
       <span class="error">
         <?php echo $errname; ?>
       </span>
       <br> <br>
-      <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Last Name" id="last-name"
+      <input type="text" placeholder="Last Name" id="last-name"
         class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
       <span class="error">
         <?php echo $errsurname; ?>
@@ -103,7 +103,12 @@
       $(".error").hide();
     });
 
-
+    $("#first-name").keydown(function() {
+      return /[a-z]/i.test(event.key);
+    });
+    $("#last-name").keydown(function() {
+      return /[a-z]/i.test(event.key);
+    });
 
 
   });

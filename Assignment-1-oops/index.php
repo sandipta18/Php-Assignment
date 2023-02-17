@@ -63,13 +63,13 @@
   ?>
   <div class="container">
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
-      <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="First Name" id="first-name"
+      <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" value="<?php echo $name; ?>">
       <span class="error">
         <?php echo $temp[2]; ?>
       </span>
       <br> <br>
-      <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Last Name" id="last-name"
+      <input type="text"  placeholder="Last Name" id="last-name"
         class="txt txt2" name="lname" value="<?php echo $surname; ?>">
       <span class="error">
         <?php echo $temp[3]; ?>
@@ -110,9 +110,15 @@
     });
 
 
-
+    $("#first-name").keydown(function() {
+      return /[a-z]/i.test(event.key);
+    });
+    $("#last-name").keydown(function() {
+      return /[a-z]/i.test(event.key);
+    });
 
   });
 </script>
 
 </html>
+<!-- onkeydown="return /[a-z]/i.test(event.key)" -->

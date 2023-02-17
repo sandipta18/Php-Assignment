@@ -186,13 +186,13 @@ validate_email();
   <div class="container">
     <form action="index.php" method="POST" enctype="multipart/form-data">
 
-      <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="First Name" id="first-name"
+      <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
       <span class="error">
         <?php echo $errname; ?>
       </span>
       <br> <br>
-      <input type="text" onkeydown="return /[a-z]/i.test(event.key)" placeholder="Last Name" id="last-name"
+      <input type="text" placeholder="Last Name" id="last-name"
         class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
       <span class="error">
         <?php echo $errsurname; ?>
@@ -240,6 +240,13 @@ validate_email();
 
     $(".txt").keypress(function () {
       $(".error").hide();
+    });
+
+    $("#first-name").keydown(function() {
+      return /[a-z]/i.test(event.key);
+    });
+    $("#last-name").keydown(function() {
+      return /[a-z]/i.test(event.key);
     });
 
   });
