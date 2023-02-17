@@ -39,8 +39,8 @@ if (isset($_SESSION["Marks"])) {
 $pdf->Cell(0, 10, "Uploaded Image", 1, 1, 'C');
 $pdf->cell(0, 0, $pdf->Image($_SESSION['uploadedImage'], 60, 100, 100, 80), 1, 0, 'C');
 
-$file = 'ksi.pdf';
-$pdf->Output($file, 'I');
+$file = 'info.pdf';
+$pdf->Output($file, 'D');
 
 
 

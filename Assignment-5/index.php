@@ -216,7 +216,7 @@ validate_email();
       <?php
       if (isset($_POST["Submit"]) && $good == 1) {
         echo "Hello {$name} {$surname} <br>";
-        echo "Phone Number is" . $number_validated;
+        echo "Phone Number is" . $number_validated."<br>";
         echo "Email ID is" . $email_validated;
       }
       ?>
@@ -231,11 +231,16 @@ validate_email();
 
 <!-- Displaying the input from text area in form of table -->
 </body>
+<?php
+if (isset($_POST["Submit"]) && $good == 1){?>
 <table>
   <tr>
     <th>Subject</th>
     <th>Marks</th>
   </tr>
+
+<?php } ?>
+
   <?php
   foreach ($marks as $key => $output) { ?>
     <tr>
