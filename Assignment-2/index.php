@@ -59,15 +59,15 @@ function validate_image()
   $target_file = $target_dir . basename($_FILES["file"]["name"]);
   $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
   $uploadOk = 1;
-  $check = $_POST["file"];
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $filepath = "images/" . $_FILES["file"]["name"];
-    if (empty($check)) {
+    if (empty($target_file)) {
       echo "No file was uploaded";
       $uploadOk = 0;
-    } elseif (file_exists($target_file)) {
+    }
+    if (file_exists($target_file)) {
       echo "File already exists.";
       $uploadOk = 0;
     } elseif ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
