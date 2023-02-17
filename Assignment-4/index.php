@@ -161,7 +161,7 @@ validate_input();
       </div>
       <br>
       <textarea name="Marks" cols="30" rows="10" id="txt-area" required></textarea><br><br>
-      <input type="tel" name="mobile" placeholder="Enter Phone Number" required><span class="error">
+      <input type="tel" name="mobile" placeholder="Enter Phone Number" required class="phone"><span class="error">
         <?php echo $errphone ?>
       </span>
       <br><br>
@@ -228,7 +228,6 @@ validate_input();
     $("#last-name").keydown(function() {
       return /[a-z]/i.test(event.key);
     });
-
   });
 </script>
 <?php
