@@ -12,12 +12,13 @@ $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont("Arial", "B", 10);
 $pdf->Cell(0, 10, "Form Details", 1, 1, 'C');
-$pdf->Cell(100, 10, "Name", 1, 0, 'C');
-$pdf->Cell(0, 10, $name, 1, 1, 'C');
+$pdf->setFillColor(230,230,230);
+$pdf->Cell(100, 10, "Name", 1, 0, 'C',true);
+$pdf->Cell(0, 10, $name, 1, 1, 'C',true);
 $pdf->Cell(100, 10, "Surname", 1, 0, 'C');
 $pdf->Cell(0, 10, $surname, 1, 1, 'C');
-$pdf->Cell(100, 10, "Phone Number", 1, 0, 'C');
-$pdf->Cell(0, 10, $number, 1, 1, 'C');
+$pdf->Cell(100, 10, "Phone Number", 1, 0, 'C',true);
+$pdf->Cell(0, 10, $number, 1, 1, 'C',true);
 $pdf->Cell(100, 10, "Email", 1, 0, 'C');
 $pdf->Cell(0, 10, $_SESSION["mail"], 1, 1, 'C');
 global $marks;
@@ -27,18 +28,20 @@ if (isset($_SESSION["Marks"])) {
   $marks = array();
   foreach ($temp as $value) {
     $line = explode("|", $value);
-    if ($line[0] != "") {
-      if ($line[1] > 100) {
+    if ($line[0] != ""  && $line[1] != "") {
+      if (($line[1] > 100) || (!is_numeric($line[1]))){
         continue;
       }
-      $pdf->Cell(100, 10, $line[0], 1, 0, 'C');
-      $pdf->Cell(0, 10, $line[1], 1, 1, 'C');
+      $pdf->setFillColor(188,204,217);
+      $pdf->Cell(100, 10, $line[0], 1, 0, 'C',true);
+      $pdf->setFillColor(147,172,191);
+      $pdf->Cell(0, 10, $line[1], 1, 1, 'C',true);
     }
   }
 }
 
 $pdf->Cell(0, 10, "Uploaded Image", 1, 1, 'C');
-$pdf->cell(0, 0, $pdf->Image($_SESSION['uploadedImage'], 60, 100, 100, 80), 1, 0, 'C');
+$pdf->cell(0, 0, $pdf->Image($_SESSION['uploadedImage'], 60, 130, 100, 80), 1, 0, 'C');
 
 $file = 'info.pdf';
 $pdf->Output($file, 'I');
