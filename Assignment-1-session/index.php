@@ -76,6 +76,7 @@ error_reporting(E_ALL);
   ?>
 
   <div class="container">
+  <?php include '../header.php'; ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
       <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" required value="<?php echo $name; ?>">

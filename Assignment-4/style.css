@@ -1,9 +1,11 @@
 * {
   padding: 0px;
   margin: 0px;
-  background-color: #4484CE;
-}
 
+}
+body{
+  background-color: #17181D;
+}
 .container {
   width: 100%;
   max-width: 1170px;
@@ -22,7 +24,7 @@ form {
   position: relative;
   border: none;
   border-radius: 5px;
-  background-color: white;
+  background-color: #f2aa4cff;
   transform: translateY(5%);
 
 }
@@ -58,13 +60,10 @@ input {
 
 .img-container {
   position: relative;
-  top: 40px;
+  top: 70px;
   text-align: center;
 }
 
-table {
-  transform: translateY(120%);
-}
 
 th {
   padding-top: 12px;
@@ -79,7 +78,7 @@ table {
   border-collapse: collapse;
   width: 20%;
   border: 1px solid black;
-  transform: translate(190%, 50%);
+  transform: translate(190%, 120%);
 
 }
 

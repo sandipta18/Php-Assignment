@@ -154,6 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <body>
 
   <div class="container">
+  <?php include '../header.php'; ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data">
 
       <input type="text" placeholder="First Name" id="first-name" class="txt txt1" name="fname"
@@ -197,11 +198,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 </body>
+<?php
+if (isset($_POST["Submit"])){?>
 <table>
   <tr>
     <th>Subject</th>
     <th>Marks</th>
   </tr>
+
+<?php } ?>
   <?php
   foreach ($marks as $key => $output) { ?>
     <tr>

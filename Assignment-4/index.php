@@ -141,6 +141,7 @@ validate_input();
 <body>
 
   <div class="container">
+  <?php include '../header.php'; ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data">
 
       <input type="text" placeholder="First Name" id="first-name"
@@ -187,11 +188,15 @@ validate_input();
 
 </body>
 <!-- This will be used to print the  input from text area in form of a table -->
+<?php
+if (isset($_POST["Submit"])){?>
 <table>
   <tr>
     <th>Subject</th>
     <th>Marks</th>
   </tr>
+
+<?php } ?>
   <?php
   foreach ($marks as $key => $output) { ?>
     <tr>

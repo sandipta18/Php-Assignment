@@ -184,6 +184,7 @@ validate_email();
 <body>
 
   <div class="container">
+  <?php include '../header.php'; ?>
     <form action="index.php" method="POST" enctype="multipart/form-data">
 
       <input type="text" placeholder="First Name" id="first-name"

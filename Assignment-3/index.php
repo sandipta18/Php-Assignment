@@ -116,6 +116,7 @@ validate_input();
 <body>
 
   <div class="container">
+  <?php include '../header.php'; ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data">
 
       <input type="text" placeholder="First Name" id="first-name"
@@ -141,8 +142,9 @@ validate_input();
       <input type="submit" name="Submit">
       <br><br>
       <?php
+      if(isset($_POST["Submit"])){
       echo "Hello {$name} {$surname}";
-
+      }
       ?>
 
     </form>
@@ -157,11 +159,15 @@ validate_input();
 
 </body>
 <!-- Printing the data from textarea in form of table -->
+<?php
+if (isset($_POST["Submit"])){?>
 <table>
   <tr>
     <th>Subject</th>
     <th>Marks</th>
   </tr>
+
+<?php } ?>
   <?php
   foreach ($marks as $key => $output) { ?>
     <tr>

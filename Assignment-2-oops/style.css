@@ -1,9 +1,11 @@
 * {
   padding: 0px;
   margin: 0px;
-  background-color: #4484CE;
-}
 
+}
+body{
+  background-color: #17181D;
+}
 .container {
   width: 100%;
   max-width: 1170px;
@@ -22,8 +24,9 @@ form {
   position: relative;
   border: none;
   border-radius: 5px;
-  background-color: white;
-  transform: translateY(5%);
+  /* background-color: white; */
+  background-color: #f2aa4cff;
+  transform: translateY(20%);
 
 }
 

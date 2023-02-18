@@ -13,7 +13,7 @@
 
 <body>
   <?php
-  //This class has a public function named validate, it will be used to validate the input taken from the user and display errors 
+  //This class has a public function named validate, it will be used to validate the input taken from the user and display errors
   //if required
   class Name
   {
@@ -64,6 +64,7 @@
   ?>
   <!-- Content -->
   <div class="container">
+  <?php include '../header.php'; ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
       <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" value="<?php echo $name; ?>">

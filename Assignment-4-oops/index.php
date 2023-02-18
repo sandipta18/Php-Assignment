@@ -10,12 +10,6 @@
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"
     integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
-  <style>
-    textarea{
-      background-color: white;
-    }
-
-  </style>
 </head>
 
 
@@ -179,6 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <body>
 
   <div class="container">
+  <?php include '../header.php'; ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data">
 
       <input type="text" placeholder="First Name" id="first-name" class="txt txt1" name="fname"
@@ -226,11 +221,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 </body>
+<?php
+if (isset($_POST["Submit"])){?>
 <table>
   <tr>
     <th>Subject</th>
     <th>Marks</th>
   </tr>
+
+<?php } ?>
   <?php
   foreach ($marks as $key => $output) { ?>
     <tr>

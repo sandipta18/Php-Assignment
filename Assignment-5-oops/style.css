@@ -1,9 +1,11 @@
 * {
   padding: 0px;
   margin: 0px;
-  background-color: #4484CE;
-}
 
+}
+body{
+  background-color: #17181D;
+}
 .container {
   width: 100%;
   max-width: 1170px;
@@ -15,15 +17,14 @@
 
 form {
   width: 450px;
-  background-color: white;
   border: 2px solid black;
   margin: auto;
   padding: 30px 40px;
   position: relative;
   border: none;
   border-radius: 5px;
-  background-color: white;
   transform: translateY(5%);
+  background-color: #f2aa4cff;
 
 }
 
