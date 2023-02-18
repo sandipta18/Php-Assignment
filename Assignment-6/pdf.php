@@ -1,4 +1,5 @@
 <?php
+ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
 session_start();
 
 
@@ -40,7 +41,7 @@ $pdf->Cell(0, 10, "Uploaded Image", 1, 1, 'C');
 $pdf->cell(0, 0, $pdf->Image($_SESSION['uploadedImage'], 60, 100, 100, 80), 1, 0, 'C');
 
 $file = 'info.pdf';
-$pdf->Output($file, 'D');
+$pdf->Output($file, 'I');
 
 
 

@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
+session_start(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -178,7 +181,17 @@ validate_image($imagename, $tempname);
 validate_email();
 
 ?>
+<?php
+$_SESSION["fname"] = $name;
+$_SESSION["lname"] = $surname;
+$_SESSION["mobile"] = $number_validated;
+$_SESSION["mail"] = $email_validated;
+$_SESSION["Marks"] = $_POST["Marks"];
 
+if ($good == 1) {
+  header("Location:pdf.php");
+}
+?>
 
 
 <body>
@@ -252,16 +265,6 @@ validate_email();
 
   });
 </script>
-<?php
-$_SESSION["fname"] = $name;
-$_SESSION["lname"] = $surname;
-$_SESSION["mobile"] = $number_validated;
-$_SESSION["mail"] = $email_validated;
-$_SESSION["Marks"] = $_POST["Marks"];
 
-if ($good == 1) {
-  header("Location:pdf.php");
-}
-?>
 
 </html>

@@ -122,7 +122,7 @@ function validate_table()
     foreach ($temp as $value) {
       $line = explode("|", $value);
       if ($line[0] != "") {
-        if ($line[1] > 100) {
+        if (($line[1] > 100) && (!is_numeric($line[1]))){
           $line[1] = "Incorrect input";
         }
         $marks[$line[0]] = $line[1];

@@ -1,9 +1,6 @@
 <?php
+ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
 session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-//ini_set(' session.save_path','SOME WRITABLE PATH');
-error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +16,7 @@ error_reporting(E_ALL);
 </head>
 
 <body>
+
   <?php
 
 
@@ -28,8 +26,7 @@ error_reporting(E_ALL);
   $surname = "";
   $temp;
   $good = 0;
-  $first_name = "";
-  $sur_name = "";
+  $firstname = "";
   function validate()
   {
     global $errorname;
@@ -74,18 +71,24 @@ error_reporting(E_ALL);
   }
   validate();
   ?>
+  <?php
+  if ($good == 1) {
+   header('Location: action.php');
+   exit;
+  }
 
+  ?>
   <div class="container">
-  <?php include '../header.php'; ?>
+  <?php include('../header.php'); ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
-      <input type="text" placeholder="First Name" id="first-name"
-        class="txt txt1" name="fname" required value="<?php echo $name; ?>">
+      <input type="text" placeholder="First Name" id="first-name" class="txt txt1" name="fname" required
+        value="<?php echo $name; ?>">
       <span class="error">
         <?php echo $errorname; ?>
       </span>
       <br> <br>
-      <input type="text" placeholder="Last Name" id="last-name"
-        class="txt txt2" name="lname" required value="<?php echo $surname; ?>">
+      <input type="text" placeholder="Last Name" id="last-name" class="txt txt2" name="lname" required
+        value="<?php echo $surname; ?>">
       <span class="error">
         <?php echo $errorsurname; ?>
       </span>
@@ -126,23 +129,16 @@ error_reporting(E_ALL);
       $(".error").hide();
     });
 
-    $("#first-name").keydown(function() {
+    $("#first-name").keydown(function () {
       return /[a-z]/i.test(event.key);
     });
-    $("#last-name").keydown(function() {
+    $("#last-name").keydown(function () {
       return /[a-z]/i.test(event.key);
     });
 
 
   });
 </script>
-<?php
 
-if ($good == 1) {
-
-
-  header('Location:action.php');
-}
-?>
 
 </html>

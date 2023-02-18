@@ -1,5 +1,8 @@
 <!-- This is basically the login page -->
-<?php session_start(); ?>
+<?php
+ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
+ session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -1,5 +1,6 @@
 <!-- this will redirect user on the basis of query value entered by user like [?q=] -->
 <?php
+ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
 session_start();
 
 if($_SERVER['REQUEST_METHOD']=="GET"){
@@ -26,7 +27,7 @@ if($_SERVER['REQUEST_METHOD']=="GET"){
     elseif($page == 7){
       header('Location: ../Assignment-7/index.php');
     }
-    else{
+    elseif($page == 0 || $page>7){
       $_SESSION['error'] = "Enter value from 1-7";
       header("Location:action.php");
 

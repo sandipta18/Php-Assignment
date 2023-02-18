@@ -1,8 +1,7 @@
 <!-- If login is successfull this page will open -->
-<?php session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+<?php
+ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +37,7 @@ error_reporting(E_ALL);
   <div class="wrapper tabled">
     <div class="stage" id="page1">
       <div class="middled">
-        <h2>Welcome User</h2>
+        <h2>Welcome <?php echo $_SESSION['name']; ?></h2>
         <div class="link-1">
           <a href="../Assignment-1/index.php">
             <span class="thin">Task</span><span class="thick">~1</span>
@@ -90,7 +89,7 @@ error_reporting(E_ALL);
         <br>
         <!-- Will take query input from user and redirect accordingly -->
         <form action="query.php" method="GET">
-          <input type="tel" name="q" placeholder=" Query" required><br>
+          <input type="tel" name="q" placeholder=" Query" required><br><span><?php echo $_SESSION['error']; ?></span>
           <input type="submit" name="" value="Submit"><br><br>
         </form>
         <a href="logout.php">Logout</a>
