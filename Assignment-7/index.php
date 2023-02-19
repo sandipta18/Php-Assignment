@@ -40,7 +40,7 @@ ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../s
     if ($password != "innoraft") {
       $errorpassword = "Enter Password Correctly";
     }
-    if ($user_name === "sandipta18" && $password === "admin") {
+    if ($user_name === "sandipta18" || $user_name === "indra" || $user_name == "rajdip" && $password === "admin") {
       $_SESSION['name'] = $_POST['Name'];
       header("Location:action.php");
     }

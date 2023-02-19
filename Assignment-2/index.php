@@ -22,7 +22,17 @@ $errorname = $errorsurname = "";
 $name = $surname = "";
 $temp;
 
-//This function will be used to validate the input taken from the user
+/**
+   * Summary of validate
+   * @var string $name
+   * @var string $surname
+   * @var string $errorname
+   * @var string $errorsurname
+   * This function will be used to validate the input taken from the user
+   * Validation Properties are as follows:
+   * Empty Name/Surname, User is allowed to only enter alphabet
+   * @return void
+*/
 function validate_input()
 {
   global $errorname;
@@ -56,6 +66,14 @@ function validate_input()
 }
 
  //This function will be used to validate the image taken as input from the user
+/**
+ * Summary of validate_image
+ * @var string $target_ir
+ * @var string $target_file
+ * @var string $imageFileType
+ * @var int $uploadOK
+ * @return void
+ */
 function validate_image()
 {
   $target_dir = "images/";
@@ -65,23 +83,29 @@ function validate_image()
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $filepath = "images/" . $_FILES["file"]["name"];
+    $filepath = "images/" . $_FILES["file"]["name"];  //Storing the filepath
+    // If file path is empty then no image was uploade so displaying error
     if (empty($target_file)) {
       echo "No file was uploaded";
       $uploadOk = 0;
     }
+    // If image already existed, displaying error
     if (file_exists($target_file)) {
       echo "File already exists.";
       $uploadOk = 0;
-    } elseif ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+    }
+    // If image type does not belong to any of the options mentioned below, displaying error
+    elseif ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
       echo "Only JPG, JPEG, PNG & GIF files are allowed.";
       $uploadOk = 0;
-    } elseif ($_FILES["file"]["size"] > 600000) {
+    }
+    // If file size is greater than 6MB, displaying error
+    elseif ($_FILES["file"]["size"] > 600000) {
       echo "Use an image less than 6MB";
       $uploadOk = 0;
     }
 
-
+    //If everything is succesfull, displaying the image
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $filepath) && $uploadOk != 0) {
       echo "<img src=" . $filepath . " height=450 width=500 />";
     }
@@ -101,31 +125,36 @@ validate_input();
   <div class="container">
   <?php include '../header.php'; ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data">
-
+    <!-- Taking input as first name from user -->
       <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
       <span class="error">
+        <!-- Displaying errors if any -->
         <?php echo $errorname; ?>
       </span>
       <br> <br>
+      <!-- Taking input as Surname from user -->
       <input type="text" placeholder="Last Name" id="last-name"
         class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
       <span class="error">
+        <!-- Displaying errors if any -->
         <?php echo $errorsurname; ?>
       </span>
       <br> <br>
 
       <div class="para">
+        <!-- Live Displaying combination of first name and last name -->
         <span class="full-name"></span>
       </div>
       <br><br>
       Select image :
+      <!-- Taking input as image from user -->
       <input type="file" name="file" required><br>
       <input type="submit" name="Submit">
       <br><br>
       <?php
       if($_SERVER["REQUEST_METHOD"]=="POST"){
-        echo "Hello {$name} {$surname}";
+        echo "Hello " .ucwords(strtolower($name))." ".ucwords(strtolower($surname));
       }
 
       ?>

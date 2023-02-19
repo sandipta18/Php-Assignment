@@ -258,7 +258,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
       <br><br>
       <?php
       if ($_SERVER['REQUEST_METHOD'] == "POST")  {            //displaying the output
-        echo "Hello " . $temp[0] . " " . $temp[1]."<br>";
+        echo "Hello " . ucwords(strtolower($temp[0])) . " " . ucwords(strtolower($temp[1]))."<br>";
         echo "Phone Number is " . $temp2[0]."<br>";
         echo "Email is ".$temp3[0];
       }

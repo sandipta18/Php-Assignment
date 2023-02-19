@@ -18,7 +18,17 @@ session_start();
 $errorname = $errorsurname = "";
 $name = $surname = "";
 $temp;
-//This function will be used to validate the input taken from the user
+/**
+   * Summary of validate
+   * @var string $name
+   * @var string $surname
+   * @var string $errorname
+   * @var string $errorsurname
+   * This function will be used to validate the input taken from the user
+   * Validation Properties are as follows:
+   * Empty Name/Surname, User is allowed to only enter alphabet
+   * @return void
+*/
 function validate_input()
 {
   global $errorname;
@@ -51,7 +61,15 @@ function validate_input()
   }
 }
 
-//This function will be used to validate the image taken as input from the user
+ //This function will be used to validate the image taken as input from the user
+/**
+ * Summary of validate_image
+ * @var string $target_ir
+ * @var string $target_file
+ * @var string $imageFileType
+ * @var int $uploadOK
+ * @return void
+ */
 function validate_image()
 {
 
@@ -63,45 +81,63 @@ function validate_image()
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $filepath = "images/" . $_FILES["file"]["name"];
-
+    // If file path is empty then no image was uploade so displaying error
+    if (empty($target_file)) {
+      echo "No file was uploaded";
+      $uploadOk = 0;
+    }
+    // If image already existed, displaying error
     if (file_exists($target_file)) {
       echo "File already exists.";
       $uploadOk = 0;
     }
-
+    // If image type does not belong to any of the options mentioned below, displaying error
     if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
       echo "Only JPG, JPEG, PNG & GIF files are allowed.";
       $uploadOk = 0;
     }
+    // If file size is greater than 6MB, displaying error
     if ($_FILES["file"]["size"] > 600000) {
       echo "Use an image less than 6MB";
       $uploadOk = 0;
     }
 
-
+    //If everything is succesfull, displaying the image
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $filepath) && $uploadOk != 0) {
       echo "<img src=" . $filepath . " height=450 width=500 />";
     }
   }
 }
 
-//This function wll be used to validate the textarea
+/**
+ * Summary of validate_table
+ * This function will validate the input from text area
+ * Accepted format of input : Subject|Marks
+ * @var array $marks
+ * @var array $temp
+ * @var array $line
+ * @return void
+ */
 function validate_table()
 {
   global $marks;
   if (isset($_POST["Marks"])) {
-
+  // Segregating the entire input on the basis on line break
     $temp = explode("\n", $_POST["Marks"]);
     $marks = array();
     foreach ($temp as $value) {
+      // Again segregating the input on the basis of  symbol |
       $line = explode("|", $value);
       if ($line[0] != "" && $line[1] != "") {
+        //If input is not empty
         if (($line[1] > 100) || (!is_numeric($line[1]))) {
+        //Validaing accepted format
           $line[1] = "Incorrect input";
         }
          elseif (is_numeric($line[0])) {
           $line[0] = "Incorrect Input";
         }
+        //If validation is succesfull store the output inside an associative array like (array['Subject']=Marks)
         $marks[$line[0]] = $line[1];
       }
     }
@@ -119,32 +155,36 @@ validate_input();
   <div class="container">
   <?php include '../header.php'; ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data">
-
+     <!-- Taking input as first name from user -->
       <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
       <span class="error">
+        <!-- Displaying error if any -->
         <?php echo $errorname; ?>
       </span>
       <br> <br>
+      <!-- Taking input as Surname from user -->
       <input type="text" placeholder="Last Name" id="last-name"
         class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
       <span class="error">
+         <!-- Displaying error if any -->
         <?php echo $errorsurname; ?>
       </span>
       <br> <br>
-
+       <!-- Live Displaying combination of first name and last name -->
       <div class="para">
         <span class="full-name"></span>
       </div>
       <br><br>
       <textarea name="Marks" cols="30" rows="10" id="txt-area" required> </textarea><br>
       Select image :
+      <!-- Taking input as image from user -->
       <input type="file" name="file"><br>
       <input type="submit" name="Submit">
       <br><br>
       <?php
       if(isset($_POST["Submit"])){
-      echo "Hello {$name} {$surname}";
+        echo "Hello " .ucwords(strtolower($name))." ".ucwords(strtolower($surname));  //displaying output
       }
       ?>
 

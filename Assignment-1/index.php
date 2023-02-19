@@ -14,16 +14,26 @@
 
 <body>
   <?php
-                                                   //This will keep the session active
-  session_start();                                //This will come handy when the user have entered the wrong form data
-                                                 //and while re entering the data in form user doesn't have to start from scratch.
+  //This will keep the session active
+  session_start(); //This will come handy when the user have entered the wrong form data
+  //and while re entering the data in form user doesn't have to start from scratch.
 
   $errorname = "";
   $errorsurname = "";
   $name = "";
   $surname = "";
   $temp;
-  //This function will be used to validate the input taken from the user
+  /**
+   * Summary of validate
+   * @var string $name
+   * @var string $surname
+   * @var string $errorname
+   * @var string $errorsurname
+   * This function will be used to validate the input taken from the user
+   * Validation Properties are as follows:
+   * Empty Name/Surname, User is allowed to only enter alphabet
+   * @return void
+   */
   function validate()
   {
     global $errorname;
@@ -58,23 +68,27 @@
   validate();
   ?>
 
-<!-- Content Section -->
+  <!-- Content Section -->
   <div class="container">
-  <?php include '../header.php'; ?>
+    <?php include '../header.php'; ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
-      <input type="text" placeholder="First Name" id="first-name"
-        class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
+      <!-- Input of First Name -->
+      <input type="text" placeholder="First Name" id="first-name" class="txt txt1" name="fname"
+        value="<?php echo $name; ?>" required>
       <span class="error">
+        <!-- displaying error if any -->
         <?php echo $errorname; ?>
       </span>
       <br> <br>
-      <input type="text" placeholder="Last Name" id="last-name"
-        class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
+      <!-- Input of Last Name -->
+      <input type="text" placeholder="Last Name" id="last-name" class="txt txt2" name="lname"
+        value="<?php echo $surname; ?>" required>
       <span class="error">
+        <!-- displaying error if any -->
         <?php echo $errorsurname; ?>
       </span>
       <br> <br>
-
+      <!-- live displaying input of first name and last name combined -->
       <div class="para">
         <span class="full-name"></span>
       </div>
@@ -82,12 +96,12 @@
       <br> <br>
       <input type="submit" class="submit">
       <br><br>
-
+      <!-- Displaying name and first name -->
       <?php
-      if($_SERVER["REQUEST_METHOD"]=="POST"){
-      echo "Hello {$name} {$surname}";}
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        echo "Hello " .ucwords(strtolower($name))." ".ucwords(strtolower($surname));
+      }
       ?>
-
 
     </form>
 
@@ -114,10 +128,10 @@
       $(".error").hide();
     });
 
-    $("#first-name").keydown(function() {
+    $("#first-name").keydown(function () {
       return /[a-z]/i.test(event.key);
     });
-    $("#last-name").keydown(function() {
+    $("#last-name").keydown(function () {
       return /[a-z]/i.test(event.key);
     });
 

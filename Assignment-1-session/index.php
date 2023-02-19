@@ -46,7 +46,7 @@ session_start();
         } else {
           $name = $tempname;
           $good = 1;
-          $_SESSION['firstname'] = $name;
+          $_SESSION['firstname'] = ucwords(strtolower($name));
 
         }
       }
@@ -62,7 +62,7 @@ session_start();
         } else {
           $surname = $tempsurname;
           $good = 1;
-          $_SESSION['surname'] = $surname;
+          $_SESSION['surname'] = ucwords(strtolower($surname));
         }
       }
 

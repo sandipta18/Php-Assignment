@@ -216,7 +216,7 @@ validate_email();
       <br><br>
       <?php
       if (isset($_POST["Submit"]) && $good == 1) {
-        echo "Hello {$name} {$surname} <br>";
+        echo "Hello " .ucwords(strtolower($name))." ".ucwords(strtolower($surname))."<br>";
         echo "Phone Number is" . $number_validated."<br>";
         echo "Email ID is" . $email_validated;
       }

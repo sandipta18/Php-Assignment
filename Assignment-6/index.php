@@ -1,6 +1,6 @@
-<?php 
+<?php
 ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
-session_start(); 
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -182,8 +182,8 @@ validate_email();
 
 ?>
 <?php
-$_SESSION["fname"] = $name;
-$_SESSION["lname"] = $surname;
+$_SESSION["fname"] = ucwords(strtolower($name));
+$_SESSION["lname"] = ucwords(strtolower($surname));
 $_SESSION["mobile"] = $number_validated;
 $_SESSION["mail"] = $email_validated;
 $_SESSION["Marks"] = $_POST["Marks"];

@@ -17,7 +17,17 @@
   //if required
   class Name
   {
-
+     /**
+      * Summary of validate
+      *This class has a public function named validate, it will be used to validate the input taken from the user and display errors
+      *if required
+      *@var string $name
+      *@var string $surname
+      *@var string $errorname
+      *@var string $errorsurname
+      *@param array $arr
+      * @return array
+      */
 
     public function validate()
     {
@@ -66,20 +76,25 @@
   <div class="container">
   <?php include '../header.php'; ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+    <!-- Taking First Name as input from user -->
       <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" value="<?php echo $name; ?>">
       <span class="error">
+        <!-- displaying errors if any -->
         <?php echo $temp[2]; ?>
       </span>
       <br> <br>
+      <!-- Taking input as second name from user -->
       <input type="text"  placeholder="Last Name" id="last-name"
         class="txt txt2" name="lname" value="<?php echo $surname; ?>">
       <span class="error">
+        <!-- displaying errors if any -->
         <?php echo $temp[3]; ?>
       </span>
       <br> <br>
 
       <div class="para">
+        <!-- live displaying first name and last name combined -->
         <span class="full-name"></span>
       </div>
 
@@ -88,7 +103,7 @@
       <br><br>
       <?php
       if ($_SERVER['REQUEST_METHOD'] == "POST")              //displaying the output
-        echo "Hello " . $temp[0] . " " . $temp[1];
+        echo "Hello " . ucwords(strtolower($temp[0])) . " " . ucwords(strtolower($temp[1]));
       ?>
 
     </form>
