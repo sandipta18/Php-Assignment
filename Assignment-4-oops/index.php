@@ -15,9 +15,7 @@
 
 
 <?php
-//This will keep the session active
- //This will come handy when the user have entered the wrong form data
-//and while re entering the data in form user doesn't have to start from scratch.
+
 
 class Name
 {
@@ -97,7 +95,7 @@ function validate_image()
       $uploadOk = 0;
     }
     // If image already existed, displaying error
-    if (file_exists($target_file)) {
+    elseif (file_exists($target_file)) {
       echo "File already exists.";
       $uploadOk = 0;
     }

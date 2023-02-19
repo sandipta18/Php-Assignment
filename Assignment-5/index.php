@@ -27,6 +27,17 @@ $temp;
 //this function will be used to validate input taken from user
 function validate_input()
 {
+  /**
+   * Summary of validate_input()
+   * @var string $name
+   * @var string $surname
+   * @var string $errorname
+   * @var string $errorsurname
+   * This function will be used to validate the input taken from the user
+   * Validation Properties are as follows:
+   * Empty Name/Surname, User is allowed to only enter alphabet
+   * @return void
+*/
   global $good;
   global $errorname;
   global $errorsurname;
@@ -60,7 +71,15 @@ function validate_input()
   }
 }
 
-//this function will be used to validate image taken as input from user
+//This function will be used for validating image input taken from user
+/**
+ * Summary of validate_image
+ * @var string $target_ir
+ * @var string $target_file
+ * @var string $imageFileType
+ * @var int $uploadOK
+ * @return void
+ */
 function validate_image()
 {
   global $good;
@@ -72,26 +91,28 @@ function validate_image()
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $filepath = "images/" . $_FILES["file"]["name"];
+    // If file path is empty then no image was uploade so displaying error
     if (empty($target_file)) {
       echo "Enter an image";
       $uploadOk = 0;
     }
-
+    // If image already existed, displaying error
     if (file_exists($target_file)) {
       echo "File already exists.";
       $uploadOk = 0;
     }
-
+    // If image type does not belong to any of the options mentioned below, displaying error
     if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
       echo "Only JPG, JPEG, PNG & GIF files are allowed.";
       $uploadOk = 0;
     }
+    // If file size is greater than 6MB, displaying error
     if ($_FILES["file"]["size"] > 600000) {
       echo "Use an image less than 6MB";
       $uploadOk = 0;
     }
 
-
+    //If everything is succesfull, displaying the image
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $filepath) && $uploadOk != 0) {
       $good = 1;
       echo "<img src=" . $filepath . " height=450 width=500 />";
@@ -101,12 +122,20 @@ function validate_image()
   }
 }
 //This function will be used to validate phone number taken as input from user
+/**
+ * Summary of validate_phone
+ * Accepted format is +91{Number}
+ * @var $number_validated;
+ * @var $errphone
+ * @return void
+ */
 function validate_phone()
 {
   global $number_validated;
   global $errphone;
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $number = $_POST["mobile"];
+    //validating the accepted format
     if (preg_match("/^[+91]{3}[0-9]{10}$/", $number)) {
       $number_validated = $number;
       $good = 1;
@@ -116,8 +145,15 @@ function validate_phone()
   }
 }
 //This function will be used to validate email taken as input from user using mailbox layer api
+/**
+ * Summary of validate_email
+ * @var string $erremail
+ * @var string $email_validated
+ * @var string $em
+ * @return void
+ */
 function validate_email()
-{
+{ 
   global $erremail;
   global $email_validated;
   $curl = curl_init();
@@ -154,17 +190,29 @@ function validate_email()
 //This function will be used to validate the text area input taken as input from the user
 function validate_table()
 {
+  /**
+ * Summary of validate_table
+ * This function will validate the input from text area
+ * Accepted format of input : Subject|Marks
+ * @var array $marks
+ * @var array $temp
+ * @var array $line
+ * @return void
+ */
   global $marks;
   if (isset($_POST["Marks"])) {
-
+  // Segregating the entire input on the basis on line break
     $temp = explode("\n", $_POST["Marks"]);
     $marks = array();
     foreach ($temp as $value) {
+      // Again segregating the input on the basis of  symbol "|"
       $line = explode("|", $value);
-      if ($line[0] != "") {
+      if ($line[0] != "" && $line[1]!="") {
+        //If input is not empty proceed
         if (($line[1] > 100) || (!is_numeric($line[1]))) {
           $line[1] = "Incorrect input";
         }
+        //If validation is succesfull store the output inside an associative array like (array['Subject']=Marks)
         $marks[$line[0]] = $line[1];
       }
     }
@@ -184,32 +232,39 @@ validate_email();
   <div class="container">
   <?php include '../header.php'; ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" enctype="multipart/form-data">
-
+    <!-- Taking input as first name from user -->
       <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
       <span class="error">
+        <!-- Displaying error if any -->
         <?php echo $errorname; ?>
       </span>
       <br> <br>
+      <!-- Taking input as surname from user -->
       <input type="text" placeholder="Last Name" id="last-name"
         class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
       <span class="error">
+        <!-- Displaying error if any -->
         <?php echo $errorsurname; ?>
       </span>
       <br> <br>
-
+      <!-- Live Displaying combination of first name and last name -->
       <div class="para">
         <span class="full-name"></span>
       </div>
       <br>
+      <!-- Taking Marks input from user -->
       <textarea name="Marks" cols="30" rows="10" id="txt-area" required></textarea><br><br>
+      <!-- Taking input as phone number from user -->
       <input type="tel" name="mobile" placeholder="Enter Phone Number" required> <span class="error">
         <?php echo $errphone ?>
       </span>
       <br><br>
+      <!-- Taking input as email from the user -->
       <input type="text" name="mail" placeholder="Enter Email" required> <span class="error">
         <?php echo $erremail ?>
       </span><br><br>
+      <!-- Taking input as image from user -->
       Select image :
       <input type="file" name="file" required><br>
       <input type="submit" name="Submit">
@@ -232,6 +287,7 @@ validate_email();
 
 <!-- Displaying the input from text area in form of table -->
 </body>
+<!-- This will be used to print the  input from text area in form of a table -->
 <?php
 if (isset($_POST["Submit"]) && $good == 1){?>
 <table>
