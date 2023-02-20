@@ -57,7 +57,7 @@ ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../s
         <input type="password" placeholder="Password" name="Password" class="box" required><span class="error">
           <?php echo $errorpassword; ?>
         </span><br>
-        <input type="submit" placeholder="Login" class="box-submit" name="submit">
+        <input type="submit" value="Login" class="box-submit" name="submit">
         <input type="submit" value="    Forgot Password" class="box" name="forgot" class="fp">
       </form>
     </div>

@@ -37,7 +37,11 @@ session_start();
   <div class="wrapper tabled">
     <div class="stage" id="page1">
       <div class="middled">
-        <h2>Welcome <?php echo $_SESSION['name']; ?></h2>
+        <h2>Welcome <?php
+        if (isset($_SESSION['name'])) {
+          echo $_SESSION['name'];
+        }
+          ?></h2>
         <div class="link-1">
           <a href="../Assignment-1/index.php">
             <span class="thin">Task</span><span class="thick">~1</span>
