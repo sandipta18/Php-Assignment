@@ -96,6 +96,7 @@ session_start();
           <input type="tel" name="q" placeholder=" Query" required><br><span><?php echo $_SESSION['error']; ?></span>
           <input type="submit" name="" value="Submit"><br><br>
         </form>
+        <!-- It will facilitate logout -->
         <a href="logout.php">Logout</a>
       </div>
 

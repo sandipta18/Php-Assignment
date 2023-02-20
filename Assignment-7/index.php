@@ -27,19 +27,23 @@ ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../s
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["Name"];
     $pass = $_POST["Password"];
+    //If name is empty throw error
     if (empty($_POST["Name"])) {
       $errorname = "Please Enter Name";
     }
+    //IF password is empty throw error
     if (empty($_POST["Password"])) {
       $errorpassword = "Please Enter Password";
     }
-
+    //If username is wrong throw error
     if ($user_name != "sandipta") {
       $errorname = "Enter User Name Correctly";
     }
+    //If  password is wrong throw error
     if ($password != "innoraft") {
       $errorpassword = "Enter Password Correctly";
     }
+    //if username and passwor is correct redirect to action page
     if ($user_name === "sandipta18" || $user_name === "indra" || $user_name == "rajdip" && $password === "admin") {
       $_SESSION['name'] = ucwords(strtolower($_POST['Name']));
       header("Location:action.php");
