@@ -41,7 +41,7 @@ ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../s
       $errorpassword = "Enter Password Correctly";
     }
     if ($user_name === "sandipta18" || $user_name === "indra" || $user_name == "rajdip" && $password === "admin") {
-      $_SESSION['name'] = $_POST['Name'];
+      $_SESSION['name'] = ucwords(strtolower($_POST['Name']));
       header("Location:action.php");
     }
 

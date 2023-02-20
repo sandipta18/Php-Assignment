@@ -32,8 +32,20 @@ $photo = "";
 $em = "";
 $email_validated = "";
 $image_upload;
+//this function will be used to validate input taken from user
 function validate_input()
 {
+  /**
+   * Summary of validate_input()
+   * @var string $name
+   * @var string $surname
+   * @var string $errorname
+   * @var string $errorsurname
+   * This function will be used to validate the input taken from the user
+   * Validation Properties are as follows:
+   * Empty Name/Surname, User is allowed to only enter alphabet
+   * @return void
+*/
   global $good;
   global $errname;
   global $errsurname;
@@ -81,6 +93,13 @@ $imagepath = $_FILES['image']['full_path'];
 $tempname = $_FILES['image']['tmp_name'];
 $imagesize = $_FILES['image']['size'];
 $errimage = "";
+/**
+ * Summary of validate_image
+ * This function will be used to validate the image taken as input from the user
+ * @param mixed $imagename
+ * @param mixed $tempname
+ * @return void
+ */
 function validate_image($imagename, $tempname)
 {
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -90,14 +109,18 @@ function validate_image($imagename, $tempname)
     global $errimage;
     global $tempname;
     global $imagename;
-    // $uploadOk = 1;
+     //If there's no image name that means that no image was uploaded so displaying error
     if (!$imagename) {
       $errimage = "Enter an image to proceed";
       $good = 0;
-    } else if ($imagesize > 6000000) {
+    }
+    //If image size is greater than 6MB
+    else if ($imagesize > 6000000) {
       $errimage = "Enter image less than 6MB";
       $good = 0;
-    } elseif ($imagename != 0) {
+    }
+    //If everything is good proceed
+    elseif ($imagename != 0) {
       $good = 1;
       $path = "images/" . $imagename;
       move_uploaded_file($tempname, $path);
@@ -108,7 +131,14 @@ function validate_image($imagename, $tempname)
   }
 
 }
-
+//This function will be used to validate phone number taken as input from user
+/**
+ * Summary of validate_phone
+ * Accepted format is +91{Number}
+ * @var $number_validated;
+ * @var $errphone
+ * @return void
+ */
 function validate_phone()
 {
   global $number_validated;
@@ -116,6 +146,7 @@ function validate_phone()
   global $good;
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $number = $_POST["mobile"];
+     //validating the accepted format
     if (preg_match("/^[+91]{3}[0-9]{10}$/", $number)) {
       $number_validated = $number;
       $good = 1;
@@ -126,13 +157,21 @@ function validate_phone()
   }
 }
 
-
+//This function will be used to validate email taken as input from user using mailbox layer api
+/**
+ * Summary of validate_email
+ * @var string $erremail
+ * @var string $email_validated
+ * @var string $em
+ * @return void
+ */
 function validate_email()
 {
   global $erremail;
   global $email_validated;
   global $em;
   global $good;
+  //Initializing curl session
   $curl = curl_init();
   $em = $_POST["mail"];
   curl_setopt_array($curl, array(
@@ -155,14 +194,17 @@ function validate_email()
   $response = curl_exec($curl);
   $validationResult = json_decode($response, true);
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //If no email is entered display error
     if (empty($_POST["mail"])) {
       $erremail = "Enter Email";
       $good = 0;
     }
+    //If format of email is not valid display error
     if (!$validationResult['format_valid'] && !$validationResult['smtp_check']) {
       $erremail = "Enter email in proper format";
       $good = 0;
     }
+    //If validation checks proceed
     if ($validationResult['format_valid'] && $validationResult['smtp_check']) {
       $email_validated = $em;
       $good = 1;
@@ -181,6 +223,7 @@ validate_image($imagename, $tempname);
 validate_email();
 
 ?>
+<!-- Setting all the session variables, and if everthing is good proceed to next page -->
 <?php
 $_SESSION["fname"] = ucwords(strtolower($name));
 $_SESSION["lname"] = ucwords(strtolower($surname));
@@ -199,33 +242,41 @@ if ($good == 1) {
   <div class="container">
   <?php include '../header.php'; ?>
     <form action="index.php" method="POST" enctype="multipart/form-data">
-
+     <!-- Taking input as first name from user -->
       <input type="text" placeholder="First Name" id="first-name"
         class="txt txt1" name="fname" value="<?php echo $name; ?>" required>
+        <!-- Displaying errors if any -->
       <span class="error">
         <?php echo $errname; ?>
       </span>
       <br> <br>
+      <!-- Taking input as surame from user -->
       <input type="text" placeholder="Last Name" id="last-name"
         class="txt txt2" name="lname" value="<?php echo $surname; ?>" required>
+        <!-- Displaying error if any -->
       <span class="error">
         <?php echo $errsurname; ?>
       </span>
       <br> <br>
-
+      <!-- Live Displaying full name -->
       <div class="para">
         <span class="full-name"></span>
       </div>
       <br>
+      <!-- Taking input as Marks from user -->
       <textarea name="Marks" cols="30" rows="10" id="txt-area"></textarea><br><br>
       <input type="tel" name="mobile" placeholder="Enter Phone Number"> <span class="error">
+        <!-- Displaying error if any -->
         <?php echo $errphone; ?>
       </span>
       <br><br>
+      <!-- Taking input as email from the user -->
       <input type="text" name="mail" placeholder="Enter Email"> <span class="error">
+        <!-- Displaying error if any -->
         <?php echo $erremail; ?>
       </span><br><br>
       Select image :
+      <!-- Taking input as image from user -->
       <input type="file" name="image"><br><span class="error">
         <?php echo $errimage; ?>
       </span><br><br>
@@ -241,7 +292,11 @@ if ($good == 1) {
 
 
 </body>
-
+<!-- used jquery to facilitate the following things -->
+<!-- User won't ba able to enter numeric value in the name field -->
+<!-- Enabled the live capturing of first name and last name and displayed them as full name -->
+<!-- If user have enterd wrong information and en error is being displayed, upon clicking the input field -->
+<!-- the error will disappear -->
 
 <script>
   var space = " ";

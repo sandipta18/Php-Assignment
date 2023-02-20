@@ -77,7 +77,7 @@ function validate_image()
 
 /**
  * Summary of validate_image
- * @var string $target_ir
+ * @var string $target_dir
  * @var string $target_file
  * @var string $imageFileType
  * @var int $uploadOK

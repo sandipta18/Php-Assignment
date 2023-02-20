@@ -68,7 +68,7 @@ function validate_input()
  //This function will be used to validate the image taken as input from the user
 /**
  * Summary of validate_image
- * @var string $target_ir
+ * @var string $target_dir
  * @var string $target_file
  * @var string $imageFileType
  * @var int $uploadOK

@@ -81,7 +81,7 @@ function validate_image()
 {
    /**
  * Summary of validate_image
- * @var string $target_ir
+ * @var string $target_dir
  * @var string $target_file
  * @var string $imageFileType
  * @var int $uploadOK
@@ -305,7 +305,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){       //Created an object to call the
       </span>
       <br><br>
       <!-- Taking input as email from the user -->
-      <input type="text" name="mail" placeholder="Enter Email" required> 
+      <input type="text" name="mail" placeholder="Enter Email" required>
       <span class="error">
         <!-- Displaying errors if any -->
         <?php echo $temp3[1]; ?>
