@@ -157,10 +157,12 @@
         <a>OOPS</a>
         <ul class="submenu">
 <li><a href="../Assignment-1-oops/index.php">Task-1-OOPS</a></li>
+<li><a href="../Assignment-1-session/index.php">Task-1-SESSION</a></li>
 <li><a href="../Assignment-2-oops/index.php">Task-2-OOPS</a></li>
 <li><a href="../Assignment-3-oops/index.php">Task-3-OOPS</a></li>
 <li><a href="../Assignment-4-oops/index.php">Task-4-OOPS</a></li>
 <li><a href="../Assignment-5-oops/index.php">Task-5-OOPS</a></li>
+<li><a href="../Assignment-5-oops/index.php">Task-6-OOPS</a></li>
 </ul>
 </li>
 </ul>
