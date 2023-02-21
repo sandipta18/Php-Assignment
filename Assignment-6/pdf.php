@@ -7,7 +7,7 @@ $name = $_SESSION["fname"];
 $surname = $_SESSION["lname"];
 $number = $_SESSION["mobile"];
 $txt = $_SESSION["Marks"];
-require("fpdf/fpdf.php");
+require("vendor/autoload.php");
 $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont("Arial", "B", 10);
