@@ -162,7 +162,7 @@
 <li><a href="../Assignment-3-oops/index.php">Task-3-OOPS</a></li>
 <li><a href="../Assignment-4-oops/index.php">Task-4-OOPS</a></li>
 <li><a href="../Assignment-5-oops/index.php">Task-5-OOPS</a></li>
-<li><a href="../Assignment-5-oops/index.php">Task-6-OOPS</a></li>
+<li><a href="../Assignment-6-oops/index.php">Task-6-OOPS</a></li>
 </ul>
 </li>
 </ul>
