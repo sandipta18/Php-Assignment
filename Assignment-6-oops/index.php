@@ -60,10 +60,10 @@ require('action.php');
         <span class="full-name"></span>
       </div>
       <br><br>
-      <textarea name="Marks"cols="30" rows="10" id="txt-area"> </textarea><br><br>
+      <textarea name="Marks"cols="30" rows="10" id="txt-area" required> </textarea><br><br>
       Select image :
       <!-- Taking input as image from user -->
-      <input type="file" name="image" ><br><span class="error"><?php echo $image_info[1]; ?></span><br>
+      <input type="file" name="image" required><br><span class="error"><?php echo $image_info[1]; ?></span><br>
       <input type="submit" name="submit">
       <br><br>
     </form>

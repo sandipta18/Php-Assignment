@@ -190,32 +190,34 @@ function validate_email()
 //This function will be used to validate the text area input taken as input from the user
 function validate_table()
 {
-  /**
- * Summary of validate_table
- * This function will validate the input from text area
- * Accepted format of input : Subject|Marks
- * @var array $marks
- * @var array $temp
- * @var array $line
- * @return void
- */
   global $marks;
   if (isset($_POST["Marks"])) {
   // Segregating the entire input on the basis on line break
-    $temp = explode("\n", $_POST["Marks"]);
-    $marks = array();
-    foreach ($temp as $value) {
-      // Again segregating the input on the basis of  symbol "|"
-      $line = explode("|", $value);
-      if ($line[0] != "" && $line[1]!="") {
-        //If input is not empty proceed
-        if (($line[1] > 100) || (!is_numeric($line[1]))) {
-          $line[1] = "Incorrect input";
+    $temp = explode("\n", $_POST['Marks']);
+      $marks = array();
+      $checker = array();
+      foreach ($temp as $value) {
+        // Again segregating the input on the basis of  symbol |
+        $line = explode("|", $value);
+        if ($line[0] != "" && $line[1] != "") {
+          //If input is not empty
+          if(in_array($line[0],$checker)){
+          $line[0] = "duplicate input";
+          }
+          array_push($checker,$line[0]);
+          if(($line[1] > 100) || (!is_numeric($line[1]))) {
+            //Validaing accepted format
+            $line[1] = "Incorrect input";
+          }
+          if (is_numeric($line[0])) {
+            $line[0] = "Incorrect Input";
+          }
+          //If validation is succesfull store the output inside an associative array like (array['Subject']=Marks)
+          $marks[$line[0]] = $line[1];
         }
-        //If validation is succesfull store the output inside an associative array like (array['Subject']=Marks)
-        $marks[$line[0]] = $line[1];
-      }
+
     }
+
   }
 }
 validate_table();

@@ -264,7 +264,7 @@ if ($good == 1) {
       </div>
       <br>
       <!-- Taking input as Marks from user -->
-      <textarea name="Marks" cols="30" rows="10" id="txt-area"></textarea><br><br>
+      <textarea name="Marks" cols="30" rows="10" id="txt-area" required></textarea><br><br>
       <input type="tel" name="mobile" placeholder="Enter Phone Number"> <span class="error">
         <!-- Displaying error if any -->
         <?php echo $errphone; ?>
@@ -277,7 +277,7 @@ if ($good == 1) {
       </span><br><br>
       Select image :
       <!-- Taking input as image from user -->
-      <input type="file" name="image"><br><span class="error">
+      <input type="file" name="image" required><br><span class="error">
         <?php echo $errimage; ?>
       </span><br><br>
       <input type="submit" name="Submit">

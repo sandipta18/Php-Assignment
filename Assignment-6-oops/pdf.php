@@ -25,13 +25,21 @@ $pdf->Cell(0, 10, $_SESSION["mail"], 1, 1, 'C');
 global $marks;
 if (isset($_SESSION["Marks"])) {
 
-  $temp = explode("\n", $_SESSION["Marks"]);
+  $temp = explode("\n", $_SESSION['Marks']);
   $marks = array();
+  $checker = array();
   foreach ($temp as $value) {
     $line = explode("|", $value);
     if ($line[0] != ""  && $line[1] != "") {
+      if(in_array($line[0],$checker)){
+        $line[0] = "Duplicate Input";
+      }
+      array_push($checker,$line[0]);
       if (($line[1] > 100) || (!is_numeric($line[1]))){
-        continue;
+        $line[1] = "Wrong Input";
+      }
+      if(is_numeric($line[0])){
+        $line[0] = "Wrong Input";
       }
       $pdf->setFillColor(188,204,217);
       $pdf->Cell(100, 10, $line[0], 1, 0, 'C',true);

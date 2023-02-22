@@ -23,27 +23,40 @@ $pdf->Cell(100, 10, "Email", 1, 0, 'C');
 $pdf->Cell(0, 10, $_SESSION["mail"], 1, 1, 'C');
 global $marks;
 if (isset($_SESSION["Marks"])) {
-
   $temp = explode("\n", $_SESSION["Marks"]);
-  $marks = array();
-  foreach ($temp as $value) {
-    $line = explode("|", $value);
-    if ($line[0] != ""  && $line[1] != "") {
-      if (($line[1] > 100) || (!is_numeric($line[1]))){
-        continue;
+    $marks = array();
+    $checker = array();
+    foreach ($temp as $value) {
+      $line = explode("|", $value);
+
+      if ($line[0] != "" && $line[1] != "" ) {
+        if(in_array($line[0],$checker)){
+        $line[0] = "Duplicate Input";
+       // $line[1] = "duplicate input";
       }
-      $pdf->setFillColor(188,204,217);
-      $pdf->Cell(100, 10, $line[0], 1, 0, 'C',true);
-      $pdf->setFillColor(147,172,191);
-      $pdf->Cell(0, 10, $line[1], 1, 1, 'C',true);
+        array_push($checker,$line[0]);
+
+        if (($line[1] > 100) || (!is_numeric($line[1]))) {
+        $line[1] = "Wrong Input";
+
+        }
+        if(is_numeric($line[0])){
+        $line[0] = "Wrong Input";
+        }
+      // print_r($checker);
+        $pdf->setFillColor(188, 204, 217);
+        $pdf->Cell(100, 10, $line[0], 1, 0, 'C', true);
+        $pdf->setFillColor(147, 172, 191);
+        $pdf->Cell(0, 10, $line[1], 1, 1, 'C', true);
+      }
     }
-  }
+
 }
 
 $pdf->Cell(0, 10, "Uploaded Image", 1, 1, 'C');
 $pdf->cell(0, 0, $pdf->Image($_SESSION['uploadedImage'], 60, 130, 100, 80), 1, 0, 'C');
 $file = 'info-'.time().'.pdf';
-$pdf->Output($file, 'D');
+$pdf->Output($file, 'I');
 
 
 

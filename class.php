@@ -170,19 +170,27 @@ class Table{
       global $marks;
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
       // Segregating the entire input on the basis on line break
-        $temp = explode("\n", $_POST["Marks"]);
+      $temp = explode("\n", $_POST['Marks']);
+       // $temp = explode("\n", $_POST["Marks"]);
         $marks = array();
+        $checker = array();
         foreach ($temp as $value) {
           // Again segregating the input on the basis of  symbol "|"
           $line = explode("|", $value);
           //If input is not empty proceed
           if ($line[0] != "" && $line[1] != "") {
+            if(in_array($line[0],$checker)){
+              $line[0] = "duplicate input";
+            }
+            array_push($checker,$line[0]);
             //Validaing accepted format
             if (($line[1] > 100) || (!is_numeric($line[1]))) {
               $line[1] = "Incorrect input";
+
             }
-             elseif (is_numeric($line[0])) {
+             if (is_numeric($line[0])) {
               $line[0] = "Incorrect Input";
+
             }
             //If validation is succesfull store the output inside an associative array like (array['Subject']=Marks)
             $marks[$line[0]] = $line[1];
