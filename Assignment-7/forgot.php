@@ -17,7 +17,7 @@ session_start();
 <input type="text" name="name" placeholder="Enter User Name"><br><br>
 <input type="submit"><br><br>
 <a href="index.php">Go back</a><br><br>
-<a href="otp.php">Can't Remember Password ? </a>
+<a href="otp.php">Can't Remember Username ? </a>
 </form>
 
 </body>
