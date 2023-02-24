@@ -187,7 +187,7 @@ validate_input();
         <span class="full-name"></span>
       </div>
       <br><br>
-      <textarea name="Marks" cols="30" rows="10" id="txt-area" required> </textarea><br>
+      <textarea name="Marks" cols="30" rows="10" id="txt-area" required="required"> </textarea><br>
       Select image :
       <!-- Taking input as image from user -->
       <input type="file" name="file" required><br>

@@ -1,6 +1,6 @@
 <!-- this will redirect user on the basis of query value entered by user like [?q=] -->
 <?php
-ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
+
 session_start();
 
 if($_SERVER['REQUEST_METHOD']=="GET"){

@@ -1,6 +1,7 @@
 <?php
-ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
 session_start();
+require_once '../vendor/autoload.php';
+use GuzzleHttp\Client;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -167,50 +168,35 @@ function validate_phone()
  */
 function validate_email()
 {
+  global $good;
   global $erremail;
   global $email_validated;
-  global $em;
-  global $good;
-  //Initializing curl session
-  $curl = curl_init();
-  $em = $_POST["mail"];
-  curl_setopt_array($curl, array(
+  $client = new Client([
+      // Base URI is used with relative requests
+      'base_uri' => 'https://api.apilayer.com'
+  ]);
+  $em = $_POST['mail'];
+  $response = $client->request('GET', 'email_verification/check?email=' . $em, [
+      'headers' => [
+          'apikey' => 'EgFVIMYLC78KM6VD65HlOY6k5VpA0CTB',
+      ]
+  ]);
 
-    CURLOPT_URL => "https://api.apilayer.com/email_verification/check?email=" . $em,
-    CURLOPT_HTTPHEADER => array(
-      "Content-Type: text/plain",
-      "apikey: 6lqXAXAXlgwac06C28c0iHsgZn47lrCy"
-    ),
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => "",
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => "GET"
-  )
-  );
-
-  $response = curl_exec($curl);
-  $validationResult = json_decode($response, true);
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //If no email is entered display error
-    if (empty($_POST["mail"])) {
+  $body = $response->getBody();
+  $arr_body = json_decode($body);
+  if($_SERVER['REQUEST_METHOD']=='POST'){
+  if (empty($_POST['mail'])) {
       $erremail = "Enter Email";
       $good = 0;
-    }
-    //If format of email is not valid display error
-    if (!$validationResult['format_valid'] && !$validationResult['smtp_check']) {
-      $erremail = "Enter email in proper format";
-      $good = 0;
-    }
-    //If validation checks proceed
-    if ($validationResult['format_valid'] && $validationResult['smtp_check']) {
+  }
+  if ($arr_body->format_valid && $arr_body->smtp_check) {
       $email_validated = $em;
       $good = 1;
-    }
-    curl_close($curl);
+  } else {
+      $erremail = "Enter Email in valid format";
+      $good = 0;
   }
+}
 }
 
 
@@ -264,14 +250,14 @@ if ($good == 1) {
       </div>
       <br>
       <!-- Taking input as Marks from user -->
-      <textarea name="Marks" cols="30" rows="10" id="txt-area" required></textarea><br><br>
-      <input type="tel" name="mobile" placeholder="Enter Phone Number"> <span class="error">
+      <textarea name="Marks" cols="30" rows="10" id="txt-area" required="required"></textarea><br><br>
+      <input type="tel" name="mobile" placeholder="Enter Phone Number" required> <span class="error">
         <!-- Displaying error if any -->
         <?php echo $errphone; ?>
       </span>
       <br><br>
       <!-- Taking input as email from the user -->
-      <input type="text" name="mail" placeholder="Enter Email"> <span class="error">
+      <input type="text" name="mail" placeholder="Enter Email" required> <span class="error">
         <!-- Displaying error if any -->
         <?php echo $erremail; ?>
       </span><br><br>

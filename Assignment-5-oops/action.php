@@ -1,4 +1,5 @@
 <?php
+
   require('../class.php');
   if ($_SERVER['REQUEST_METHOD'] == "POST") {     //Created an object to call the function(validate_name)inside it for validation
     $obj = new Name();

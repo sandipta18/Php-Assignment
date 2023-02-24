@@ -1,3 +1,8 @@
+<?php 
+require_once '../vendor/autoload.php';
+
+use GuzzleHttp\Client;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,22 +99,22 @@ function validate_image()
     // If file path is empty then no image was uploade so displaying error
     if (empty($target_file)) {
       echo "Enter an image";
-      $uploadOk = 0;
+      $good = 0;
     }
     // If image already existed, displaying error
     if (file_exists($target_file)) {
       echo "File already exists.";
-      $uploadOk = 0;
+      $good = 0;
     }
     // If image type does not belong to any of the options mentioned below, displaying error
     if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
       echo "Only JPG, JPEG, PNG & GIF files are allowed.";
-      $uploadOk = 0;
+      $good = 0;
     }
     // If file size is greater than 6MB, displaying error
     if ($_FILES["file"]["size"] > 600000) {
       echo "Use an image less than 6MB";
-      $uploadOk = 0;
+      $good = 0;
     }
 
     //If everything is succesfull, displaying the image
@@ -133,6 +138,7 @@ function validate_phone()
 {
   global $number_validated;
   global $errphone;
+  global $good;
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $number = $_POST["mobile"];
     //validating the accepted format
@@ -154,37 +160,35 @@ function validate_phone()
  */
 function validate_email()
 {
+  global $good;
   global $erremail;
   global $email_validated;
-  $curl = curl_init();
-  $em = $_POST["mail"];
-  curl_setopt_array($curl, array(
+  $client = new Client([
+      // Base URI is used with relative requests
+      'base_uri' => 'https://api.apilayer.com'
+  ]);
+  $em = $_POST['mail'];
+  $response = $client->request('GET', 'email_verification/check?email=' . $em, [
+      'headers' => [
+          'apikey' => 'EgFVIMYLC78KM6VD65HlOY6k5VpA0CTB',
+      ]
+  ]);
 
-    CURLOPT_URL => "https://api.apilayer.com/email_verification/check?email=" . $em,
-    CURLOPT_HTTPHEADER => array(
-      "Content-Type: text/plain",
-      "apikey: EgFVIMYLC78KM6VD65HlOY6k5VpA0CTB"
-    ),
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => "",
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => "GET"
-  )
-  );
-
-  $response = curl_exec($curl);
-  $validationResult = json_decode($response, true);
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($validationResult['format_valid'] && $validationResult['smtp_check']) {
-      $email_validated = $em;
-    } else {
-      $erremail = " Enter email in proper format";
-    }
-    curl_close($curl);
+  $body = $response->getBody();
+  $arr_body = json_decode($body);
+  if($_SERVER['REQUEST_METHOD']=='POST'){
+  if (empty($_POST['mail'])) {
+      $erremail = "Enter Email";
+      $good = 0;
   }
+  if ($arr_body->format_valid && $arr_body->smtp_check) {
+      $email_validated = $em;
+      $good = 1;
+  } else {
+      $erremail = "Enter Email in valid format";
+      $good = 0;
+  }
+}
 }
 
 //This function will be used to validate the text area input taken as input from the user
@@ -256,7 +260,7 @@ validate_email();
       </div>
       <br>
       <!-- Taking Marks input from user -->
-      <textarea name="Marks" cols="30" rows="10" id="txt-area" required></textarea><br><br>
+      <textarea name="Marks" cols="30" rows="10" id="txt-area" required="required"></textarea><br><br>
       <!-- Taking input as phone number from user -->
       <input type="tel" name="mobile" placeholder="Enter Phone Number" required> <span class="error">
         <?php echo $errphone ?>

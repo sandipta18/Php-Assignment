@@ -1,5 +1,4 @@
 <?php
-ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
 session_start();
 
 
@@ -7,7 +6,7 @@ $name = $_SESSION["fname"];
 $surname = $_SESSION["lname"];
 $number = $_SESSION["mobile"];
 $txt = $_SESSION["Marks"];
-require("vendor/autoload.php");
+require '../vendor/autoload.php';
 $pdf = new FPDF();
 $pdf->AddPage();
 $pdf->SetFont("Arial", "B", 10);

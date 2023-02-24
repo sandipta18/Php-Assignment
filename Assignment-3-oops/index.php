@@ -44,7 +44,7 @@ require('action.php');
         <span class="full-name"></span>
       </div>
       <br><br>
-      <textarea name="Marks" cols="30" rows="10" id="txt-area" required> </textarea><br><br>
+      <textarea name="Marks" cols="30" rows="10" id="txt-area" required="required"> </textarea><br><br>
       Select image :
       <!-- Taking input as image from user -->
       <input type="file" name="image" ><br><span class="error" required><?php echo $temp1[1]; ?></span><br>
@@ -52,7 +52,7 @@ require('action.php');
       <br><br>
       <?php
       if ($_SERVER['REQUEST_METHOD'] == "POST")  {
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['submit']) && $good == 1) {
           //displaying the output
           echo "Hello " . ucwords(strtolower($temp[0])) . " " . ucwords(strtolower($temp[1]));
         }
@@ -62,7 +62,7 @@ require('action.php');
     <div class="img-container">
       <?php
        if ($_SERVER['REQUEST_METHOD'] == "POST")  {
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['submit']) && $good==1) {
           //displaying the output
           echo "<img src=" . $temp1[0] . " height=450 width=500 />";
         }
@@ -77,7 +77,7 @@ require('action.php');
 </body>
 <?php
 // displaying input from text area
-if (isset($_POST["submit"])){?>
+if (isset($_POST["submit"]) && $good==1){?>
 <table>
   <tr>
     <th>Subject</th>

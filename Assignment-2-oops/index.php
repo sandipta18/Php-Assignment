@@ -51,7 +51,7 @@ require('action.php');
       <br><br>
       <?php
       if ($_SERVER['REQUEST_METHOD'] == "POST")  {
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['submit']) && $good==1) {
           //displaying the output
           echo "Hello " . ucwords(strtolower($temp[0])) . " " . ucwords(strtolower($temp[1]));
         }
@@ -61,7 +61,7 @@ require('action.php');
     <div class="img-container">
       <?php
        if ($_SERVER['REQUEST_METHOD'] == "POST")  {
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['submit']) && $good==1) {
           //displaying the output
           echo "<img src=" . $temp1[0] . " height=450 width=500 />";
         }
