@@ -1,7 +1,5 @@
 <?php
-
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +16,8 @@ session_start();
 <p>Password Recovery Window</p>
 <input type="text" name="name" placeholder="Enter User Name"><br><br>
 <input type="submit"><br><br>
-<a href="index.php">Go back</a>
+<a href="index.php">Go back</a><br><br>
+<a href="otp.php">Can't Remember Password ? </a>
 </form>
 
 </body>
@@ -28,7 +27,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 $username = $_POST["name"];
 if($username === "sandipta18"){
   echo "Your Password is : admin";
-
 }
 else{
   echo "Wrong Username";
@@ -37,11 +35,6 @@ else{
 ?>
 </html>
 <?php
-
 session_unset();
 session_destroy();
-session_write_close();
-setcookie(session_name(),'',0,'/');
-session_regenerate_id(true);
-
 ?>
