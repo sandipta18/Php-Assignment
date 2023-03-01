@@ -14,7 +14,7 @@ require 'vendor/autoload.php';
 </head>
 <body>
     <form action="validate_otp.php" method="post">
-        <input type="tel" name="otp"><br><br>
+        <input type="tel" name="otp" placeholder="Enter OTP"><br><br>
         <input type="submit" name='submit'>
     </form>
 </body>

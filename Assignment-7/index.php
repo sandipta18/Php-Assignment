@@ -1,7 +1,7 @@
 <!-- This is basically the login page -->
 <?php
 
- session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,8 +23,18 @@
 
   class Login
   {
+
     function validate_login()
     {
+      $servername = 'localhost';
+      $username = 'sandipta';
+      $password = '182001@Mimo';
+      $database = 'Assignment_7';
+      $link = mysqli_connect($servername, $username, $password, $database);
+      if (!$link) {
+        die( mysqli_connect_error());
+      }
+      
       global $errorname;
       global $errorpassword;
       global $user_name;
@@ -42,24 +52,33 @@
         if (empty($_POST["Password"])) {
           $errorpassword = "Please Enter Password";
         }
-        //If username is wrong throw error
-        if ($user_name != "sandipta") {
-          $errorname = "Enter User Name Correctly";
-        }
-        //If  password is wrong throw error
-        if ($password != "innoraft") {
-          $errorpassword = "Enter Password Correctly";
-        }
-        //if username and passwor is correct redirect to action page
-        if ($user_name === "sandipta18" || $user_name === "indra" || $user_name == "rajdip" && $password === "admin") {
+        
+        // if ($user_name != "sandipta") {
+        //   $errorname = "Enter User Name Correctly";
+        // }
+        
+        // if ($password != "innoraft") {
+        //   $errorname = "Enter User Name Correctly";
+        // }
+        
+        // if ($user_name === "sandipta18" || $user_name === "indra" || $user_name == "rajdip" && $password === "admin") {
+        //   $_SESSION['name'] = ucwords(strtolower($_POST['Name']));
+        //   header("Location:action.php");
+        // }
+        $query = "select * from Signup where UserName = '$user_name' and Pass_word = '$password'";
+        $result = mysqli_query($link,$query);
+        $count = mysqli_num_rows($result);
+        if($count>0){
           $_SESSION['name'] = ucwords(strtolower($_POST['Name']));
           header("Location:action.php");
         }
-
+        else{
+          $errorname = "Enter User Name Correctly";
+          $errorname = "Enter User Name Correctly";
+        }
       }
-      $output = array($user_name,$password,$errorname,$errorpassword);
+      $output = array($user_name, $password, $errorname, $errorpassword);
       return $output;
-
     }
   }
   ?>
@@ -78,24 +97,32 @@
           <?php echo $temp[3]; ?>
         </span><br>
         <input type="submit" value="Login" class="box-submit" name="submit">
+        <!-- <input type="submit" value="Sign Up" class="box-submit" name="signup" class="sup"> -->
         <input type="submit" value="    Forgot Password" class="box" name="forgot" class="fp">
+
       </form>
+      <a href="signup.php" class="box-submit signup">Sign Up</a>
     </div>
   </div>
 </body>
 <!-- if forgot password option is clicked then it will redirect to an window where we can reset the password -->
 <script>
   var space = " ";
-  $(document).ready(function () {
+  $(document).ready(function() {
 
-    $(".fp").click(function(){
+    $(".fp").click(function() {
       <?php
-      if(isset($_POST["forgot"])){
-       header("Location:forgot.php");
+      if (isset($_POST["forgot"])) {
+        header("Location:forgot.php");
       }
       ?>
     });
 
+    $(".signup").click(function() {
+
+    })
+
   });
 </script>
+
 </html>
