@@ -1,7 +1,9 @@
 <?php 
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 session_start();
-require '../class.php';
-
+require 'class.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,9 +30,7 @@ require '../class.php';
 					<input class="text email" type="email" name="mail" placeholder="Email" required="">
 					<input class="text w3lpass" type="password" name="password" placeholder="Password" required="">
 					<span>
-						<?php  
-						echo $error;
-						?>
+				       <?php echo $error; ?>
 					</span>
 					<div class="wthree-text">
 						<label class="anim">
@@ -62,20 +62,41 @@ require '../class.php';
 </body>
 </html>
 <?php 
-global $error;
-
+$error = "";
+$error_password = "";
+$good = 1;
+    if($_SERVER['REQUEST_METHOD']=='POST'){
 	if(isset($_POST['submit'])){
+		$obj = new validate();
+		if($obj->validate_password($_POST['password'])){
+		  $_SESSION['password'] = $_POST['password'];
+		}
+		else{
+           $error_password = "Wrong Input Value";
+		   echo "<script> alert ('Enter Password Correctly'); </script>";
+		   $good = 0;
+		}
 		$_SESSION['username'] = $_POST['username'];
-		$_SESSION['email'] = $_POST['mail'];
-        $_SESSION['password'] = $_POST['password'];
+        if($obj->validate_email($_POST['mail'])){
+			$_SESSION['email'] = $_POST['mail'];
+		}
+        else{
+			echo "<script> alert ('Wrong Email'); </script>";
+			$good = 0;
+		}
+		
+        
 		if($_SESSION['checker']==1){
 			$error = "Alredy Exists";
 			
+			
 		}
+		if($good == 1){
 		header('location:signupdb.php');
-		
+		}
 		
 		
 	}
+}
 
 ?>

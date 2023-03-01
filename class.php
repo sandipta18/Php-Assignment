@@ -188,3 +188,4 @@ class Table
         return $marks;  //return the array consisting of validated data
     }
 }
+?>
