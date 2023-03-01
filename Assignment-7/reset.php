@@ -16,7 +16,7 @@
       <img src="" id="signupLogo"/>
       
       <h2 class="formTitle">
-        Login to your account
+        Set New Password
       </h2>
       
     <div class="inputDiv">
