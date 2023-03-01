@@ -1,6 +1,10 @@
-<?php 
-require_once '../vendor/autoload.php';
 
+<?php 
+session_start();
+if($_SESSION['set']==FALSE){
+  header('location: ../Assignment-7/index.php');
+}
+require_once '../vendor/autoload.php';
 use GuzzleHttp\Client;
 ?>
 <!DOCTYPE html>
@@ -343,8 +347,6 @@ if (isset($_POST["Submit"]) && $good == 1){?>
 
   });
 </script>
-<?php
-session_destroy();
-?>
+
 
 </html>

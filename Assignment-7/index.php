@@ -2,6 +2,7 @@
 <?php
 
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +40,7 @@ session_start();
       global $errorpassword;
       global $user_name;
       global $password;
+      $_SESSION['set'] = false;
       $errorname = "";
       $errorpassword = "";
       $user_name = $_POST["Name"];
@@ -57,6 +59,7 @@ session_start();
         $count = mysqli_num_rows($result);
         if($count>0){
           $_SESSION['name'] = ucwords(strtolower($_POST['Name']));
+          $_SESSION['set'] = true;
           header("Location:action.php");
         }
         else{

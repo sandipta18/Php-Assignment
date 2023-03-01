@@ -1,6 +1,10 @@
 <?php
-//ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../session'));
+
 session_start();
+if($_SESSION['set']==FALSE){
+  header('location: ../Assignment-7/index.php');
+}
+?>
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,3 +1,10 @@
+ <?php 
+session_start();
+if($_SESSION['set']==FALSE){
+  header('location: ../Assignment-7/index.php');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +22,7 @@
 <body>
   <?php
   //This will keep the session active
-  session_start(); //This will come handy when the user have entered the wrong form data
+   //This will come handy when the user have entered the wrong form data
   //and while re entering the data in form user doesn't have to start from scratch.
 
   $errorname = "";
@@ -70,7 +77,7 @@
 
   <!-- Content Section -->
   <div class="container">
-    <?php include '../header.php'; ?>
+    <?php require '../header.php'; ?>
     <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
       <!-- Input of First Name -->
       <input type="text" placeholder="First Name" id="first-name" class="txt txt1" name="fname"
@@ -138,8 +145,6 @@
 
   });
 </script>
-<?php
-session_destroy();
-?>
+
 
 </html>

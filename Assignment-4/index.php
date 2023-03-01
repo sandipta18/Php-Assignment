@@ -1,3 +1,9 @@
+<?php 
+session_start();
+if($_SESSION['set']==FALSE){
+  header('location: ../Assignment-7/index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -293,8 +299,6 @@ if (isset($_POST["Submit"])){?>
     });
   });
 </script>
-<?php
-session_destroy();
-?>
+
 
 </html>

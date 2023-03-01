@@ -1,3 +1,9 @@
+<?php 
+session_start();
+if($_SESSION['set']==FALSE){
+  header('location: ../Assignment-7/index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -153,6 +159,7 @@
 <li><a href="../Assignment-5/index.php">Task 5</a></li>
 <li><a href="../Assignment-6/index.php">Task 6</a></li>
 <li><a href="../Assignment-7/index.php">Task 7</a></li>
+
 <li>
         <a>OOPS</a>
         <ul class="submenu">
@@ -165,6 +172,7 @@
 <li><a href="../Assignment-6-oops/index.php">Task-6-OOPS</a></li>
 </ul>
 </li>
+<li><a href="../Assignment-7/logout.php">Logout</a></li>
 </ul>
 </body>
 </html>
