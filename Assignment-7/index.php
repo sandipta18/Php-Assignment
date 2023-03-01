@@ -52,19 +52,6 @@ session_start();
         if (empty($_POST["Password"])) {
           $errorpassword = "Please Enter Password";
         }
-        
-        // if ($user_name != "sandipta") {
-        //   $errorname = "Enter User Name Correctly";
-        // }
-        
-        // if ($password != "innoraft") {
-        //   $errorname = "Enter User Name Correctly";
-        // }
-        
-        // if ($user_name === "sandipta18" || $user_name === "indra" || $user_name == "rajdip" && $password === "admin") {
-        //   $_SESSION['name'] = ucwords(strtolower($_POST['Name']));
-        //   header("Location:action.php");
-        // }
         $query = "select * from Signup where UserName = '$user_name' and Pass_word = '$password'";
         $result = mysqli_query($link,$query);
         $count = mysqli_num_rows($result);
@@ -97,11 +84,9 @@ session_start();
           <?php echo $temp[3]; ?>
         </span><br>
         <input type="submit" value="Login" class="box-submit" name="submit">
-        <!-- <input type="submit" value="Sign Up" class="box-submit" name="signup" class="sup"> -->
-        <input type="submit" value="    Forgot Password" class="box" name="forgot" class="fp">
-
       </form>
       <a href="signup.php" class="box-submit signup">Sign Up</a>
+      <a href="forgot.php" class="box-submit signup">Forgot Password</a>
     </div>
   </div>
 </body>

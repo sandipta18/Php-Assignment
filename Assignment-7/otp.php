@@ -1,6 +1,8 @@
 <?php 
 session_start();
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -15,38 +17,30 @@ use PHPMailer\PHPMailer\Exception;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recovery Window</title>
 </head>
-<body>
-    <form action="otp.php" method = "POST">
-    <input type="email" name="email" placeholder="Enter Email"><br><br>
-    <input type="submit" name="submit">
-    </form>
-</body>
 <?php 
 
 
 
 require 'vendor/autoload.php';
- 
-if(isset($_POST['submit'])){
   $mail = new PHPMailer(true);
   $mail->isSMTP();
   $mail->Host = 'smtp.gmail.com';
   $mail->SMTPAuth = true;
-  $mail->Username = 'sandysardar1800@gmail.com';
-  $mail->Password = 'halwxhsxuccltrlz';
+  $mail->Username = 'sandiptasardar99@gmail.com';
+  $mail->Password = 'josixxrpxqknyzsy';
   $mail->SMTPSecure = 'ssl';
   $mail->Port = 465;
-  $mail->setFrom('sandysardar1800@gmail.com');
-  $mail->addAddress($_POST['email']);
+  $mail->setFrom('sandiptasardar99@gmail.com');
+  $mail->addAddress($_POST['mail']);
   $mail->isHTML(true);
   $otp = rand(9000,9999);
   $mail->Subject = $otp;
   $mail->Body = 'OTP';
   $mail->send();
   $_SESSION['otp'] = $otp;
-  $_SESSION['email'] = $_POST['email'];
+  $_SESSION['email'] = $_POST['mail'];
   header('location:validate_otp.php');
-}
+
 ?>
 
 </html>

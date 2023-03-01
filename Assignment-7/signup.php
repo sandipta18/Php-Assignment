@@ -1,6 +1,7 @@
 <?php 
-$_SESSION['checker'] = 0;
 session_start();
+require '../class.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,11 +23,15 @@ session_start();
 		<h1>SignUp Form</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="signupdb.php" method="post">
+				<form action="signup.php" method="post">
 					<input class="text" type="text" name="username" placeholder="Username" required="">
 					<input class="text email" type="email" name="mail" placeholder="Email" required="">
 					<input class="text w3lpass" type="password" name="password" placeholder="Password" required="">
-					<span><?php echo $error; ?></span>
+					<span>
+						<?php  
+						echo $error;
+						?>
+					</span>
 					<div class="wthree-text">
 						<label class="anim">
 							<input type="checkbox" class="checkbox" required="">
@@ -57,8 +62,20 @@ session_start();
 </body>
 </html>
 <?php 
-if($_SESSION['checker'] == 1){
-	// $error = "Account already exists";
-	echo "<script>alert('Account already exists');</script>";
-}
+global $error;
+
+	if(isset($_POST['submit'])){
+		$_SESSION['username'] = $_POST['username'];
+		$_SESSION['email'] = $_POST['mail'];
+        $_SESSION['password'] = $_POST['password'];
+		if($_SESSION['checker']==1){
+			$error = "Alredy Exists";
+			
+		}
+		header('location:signupdb.php');
+		
+		
+		
+	}
+
 ?>
