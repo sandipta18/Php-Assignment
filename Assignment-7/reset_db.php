@@ -27,7 +27,7 @@ if (!$link) {
       header('location: reset.php');
       
     }
-    $new_password = $_POST['password'];
+    $new_password = md5($_POST['password']);
     $mail = $_SESSION['email'];
     $sql = "select * from Signup where Email = '$mail' ";
     $result = mysqli_query($link,$sql);

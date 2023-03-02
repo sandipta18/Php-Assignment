@@ -9,7 +9,7 @@
 </div>
 <script>
     function countdown() {
-        var seconds = 5;
+        var seconds = 120;
         function tick() {
           var counter = document.getElementById("counter");
           seconds--;

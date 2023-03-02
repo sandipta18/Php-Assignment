@@ -14,7 +14,7 @@ if (!$link) {
     
     $name = $_SESSION['username'];
     $email = $_SESSION['email'];
-    $password = $_SESSION['password'];
+    $password = md5($_SESSION['password']);
 
     $query = "select * from Signup where Email = '$email' ";
     $duplicate = mysqli_query($link,$query);
