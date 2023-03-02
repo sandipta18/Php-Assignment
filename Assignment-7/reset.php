@@ -26,7 +26,7 @@ include 'loadin.php';
 
         <div class="inputDiv">
           <label class="inputLabel" for="password">New Password</label>
-          <input type="password" id="password" name="password"  required><i class="fa-sharp fa-solid fa-eye show" onclick="show_pass()"></i>
+          <input type="password" id="password" name="password"  required><i class="fa-sharp fa-solid fa-eye show" onclick="show_passed()"></i>
         </div>
 
         <div class="inputDiv">

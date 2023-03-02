@@ -73,7 +73,7 @@ function show_pass(){
     x.type = "password";
   }
 }
-function show_pass(){
+function show_passed(){
   var x= document.getElementById("password");
   if (x.type === "password") {
     x.type = "text";
