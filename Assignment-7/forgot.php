@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'loadin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,11 +11,7 @@ session_start();
 <meta name="Description" content="Enter your description here"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<style>
-  .form-gap {
-    padding-top: 70px;
-}
-</style>
+<link rel="stylesheet" href="css/style4.css">
 <title>Forgot Password</title>
 </head>
 
@@ -52,7 +49,9 @@ session_start();
                       <div class="form-group">
                         <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">
                       </div>
-                      
+                      <div class="form-group">
+                        <button name="recover-submit" class="btn btn-lg btn-primary btn-block" ><a href="index.php">Go Back</a></button>
+                      </div>
                       <input type="hidden" class="hide" name="token" id="token" value=""> 
                     </form>
     

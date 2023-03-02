@@ -4,6 +4,7 @@
 // error_reporting(E_ALL);
 session_start();
 require 'class.php';
+include 'loadin.php';
 ?>
 <!DOCTYPE html>
 <html>

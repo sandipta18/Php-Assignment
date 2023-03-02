@@ -2,7 +2,7 @@
 <?php
 
 session_start();
-
+include 'loadin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

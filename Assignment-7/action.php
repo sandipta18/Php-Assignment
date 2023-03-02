@@ -5,6 +5,7 @@ session_start();
 if($_SESSION['set']==false){
   header('location: ../Assignment-7/index.php');
 }
+include 'loadin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

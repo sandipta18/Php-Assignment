@@ -1,4 +1,5 @@
 <?php 
+include '../Assignment-7/loadin.php';
 session_start();
 if($_SESSION['set']==false){
   header('location: ../Assignment-7/index.php');

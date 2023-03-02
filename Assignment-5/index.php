@@ -1,6 +1,7 @@
 
 <?php 
 session_start();
+include '../Assignment-7/loadin.php';
 if($_SESSION['set']==FALSE){
   header('location: ../Assignment-7/index.php');
 }
