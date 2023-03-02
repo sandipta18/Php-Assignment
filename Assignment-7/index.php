@@ -2,6 +2,7 @@
 <?php
 
 session_start();
+include 'class.php';
 include 'loadin.php';
 ?>
 <!DOCTYPE html>
@@ -17,62 +18,10 @@ include 'loadin.php';
 </head>
 
 <body>
+
+
   <?php
-
-  //This is checking whether the username and passowrd is empty or not
-  //and will check if the username and passowrd is correct or not
-
-  class Login
-  {
-
-    function validate_login()
-    {
-      $servername = 'localhost';
-      $username = 'sandipta';
-      $password = '182001@Mimo';
-      $database = 'Assignment_7';
-      $link = mysqli_connect($servername, $username, $password, $database);
-      if (!$link) {
-        die( mysqli_connect_error());
-      }
-      
-      global $errorname;
-      global $errorpassword;
-      global $user_name;
-      global $password;
-      $_SESSION['set'] = false;
-      $errorname = "";
-      $errorpassword = "";
-      $user_name = $_POST["Name"];
-      $password = md5($_POST["Password"]);
-      if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        //If name is empty throw error
-        if (empty($_POST["Name"])) {
-          $errorname = "Please Enter Name";
-        }
-        //IF password is empty throw error
-        if (empty($_POST["Password"])) {
-          $errorpassword = "Please Enter Password";
-        }
-        $query = "select * from Signup where UserName = '$user_name' and Pass_word = '$password'";
-        $result = mysqli_query($link,$query);
-        $count = mysqli_num_rows($result);
-        if($count>0){
-          $_SESSION['name'] = ucwords(strtolower($_POST['Name']));
-          $_SESSION['set'] = true;
-          header("Location:action.php");
-        }
-        else{
-          $errorname = "Enter User Name Correctly";
-          $errorname = "Enter User Name Correctly";
-        }
-      }
-      $output = array($user_name, $password, $errorname, $errorpassword);
-      return $output;
-    }
-  }
-  ?>
-  <?php
+  
   $obj = new Login();
   $temp = $obj->validate_login();
   ?>

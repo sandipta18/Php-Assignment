@@ -16,23 +16,6 @@ include 'loadin.php';
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome</title>
   <link rel="stylesheet" href="css/style1.css">
-  <style>
-    input {
-      display: block;
-      margin: 2em auto;
-      border: none;
-      padding: 0;
-      width: 10.5ch;
-      background: repeating-linear-gradient(90deg, dimgrey 0, dimgrey 1ch, transparent 0, transparent 1.5ch) 0 100%/10ch 2px no-repeat;
-      font: 5ch droid sans mono, consolas, monospace;
-      letter-spacing: 0.5ch;
-    }
-
-    input:focus {
-      outline: none;
-      color: dodgerblue;
-    }
-  </style>
 </head>
 
 <body>
