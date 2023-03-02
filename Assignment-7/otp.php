@@ -4,7 +4,7 @@ session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
+include 'confidential.php';
 
 ?>
 <!DOCTYPE html>
@@ -25,8 +25,8 @@ require 'vendor/autoload.php';
   $mail->isSMTP();
   $mail->Host = 'smtp.gmail.com';
   $mail->SMTPAuth = true;
-  $mail->Username = 'sandiptasardar99@gmail.com';
-  $mail->Password = 'josixxrpxqknyzsy';
+  $mail->Username = $email_sender;
+  $mail->Password = $email_password;
   $mail->SMTPSecure = 'ssl';
   $mail->Port = 465;
   $mail->setFrom('sandiptasardar99@gmail.com');
