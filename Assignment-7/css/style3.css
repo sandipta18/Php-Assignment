@@ -92,3 +92,14 @@ animation: spin 2s linear infinite;
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+a{
+  text-decoration: none;
+}
+.anchor{
+  text-align: center;
+  margin: auto;
+  padding-top: 20px;
+}
+.anchor a{
+  padding-top: 15px;
+}

@@ -9,7 +9,7 @@
 </div>
 <script>
     function countdown() {
-        var seconds = 120;
+        var seconds = 5;
         function tick() {
           var counter = document.getElementById("counter");
           seconds--;
@@ -21,7 +21,7 @@
            else {
             document.getElementById("verifiBtn").innerHTML = `
                 <div class="Btn" id="ResendBtn">
-                    <button type="submit">Resend</button>
+                    <button type="submit">Resend OTP</button>
                     
                 </div>
             `;

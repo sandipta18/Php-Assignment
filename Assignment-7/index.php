@@ -114,3 +114,15 @@ session_start();
 </script>
 
 </html>
+<?php 
+
+if($_SESSION['account'] == true){
+  echo "<script> alert ('Account Created'); </script>";
+  session_unset($_SESSION['account']);
+ }
+
+elseif($_SESSION['password_changed'] == true){
+ echo "<script> alert ('Password Changed'); </script>";
+ session_unset($_SESSION['password_changed']);
+}
+?>

@@ -5,6 +5,7 @@ $servername = 'localhost';
 $username = 'sandipta';
 $password = '182001@Mimo';
 $database = 'Assignment_7';
+$_SESSION['account'] = false;
 $link = mysqli_connect($servername,$username,$password,$database); 
 
 if (!$link) {
@@ -31,6 +32,8 @@ if (!$link) {
     $result = mysqli_query($link,$sql);
     
     if($result){
+      // echo "<script> alert ('Account Created'); </script>";
+      $_SESSION['account'] = true;
       header('location:index.php');
     }
     
