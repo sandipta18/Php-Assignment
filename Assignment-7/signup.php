@@ -12,6 +12,7 @@ include 'loadin.php';
 <title>Sign Up Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Custom Theme files -->
 <link href="css/style2.css" rel="stylesheet" type="text/css" media="all" />
@@ -19,6 +20,7 @@ include 'loadin.php';
 <!-- web font -->
 <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
 <!-- //web font -->
+<script src="script.js"></script>
 </head>
 <body>
 	<!-- main -->
@@ -29,7 +31,8 @@ include 'loadin.php';
 				<form action="signup.php" method="post">
 					<input class="text" type="text" name="username" placeholder="Username" required="">
 					<input class="text email" type="email" name="mail" placeholder="Email" required="">
-					<input class="text w3lpass" type="password" name="password" placeholder="Password" required="">
+					<input class="text w3lpass" type="password" name="password" placeholder="Password" id = "hidden" required="">
+					<i class="fa-sharp fa-solid fa-eye show" onclick="show_pass()"></i>
 					<span>
 				       <?php echo $error; ?>
 					</span>

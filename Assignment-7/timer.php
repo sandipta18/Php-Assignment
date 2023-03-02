@@ -23,7 +23,7 @@
 
 <script>
   function countdown() {
-    var seconds = 1200;
+    var seconds = 59;
 
     function tick() {
       var counter = document.getElementById("counter");

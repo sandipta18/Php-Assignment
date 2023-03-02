@@ -103,3 +103,6 @@ a{
 .anchor a{
   padding-top: 15px;
 }
+.show{
+  transform: translate(363px, -29px);
+}

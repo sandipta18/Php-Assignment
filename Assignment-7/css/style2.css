@@ -880,3 +880,6 @@ a{
 form{
   text-align: center;
 }
+.show{
+  transform: translate(286px, -57px);
+}
