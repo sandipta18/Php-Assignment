@@ -44,7 +44,7 @@ session_start();
       $errorname = "";
       $errorpassword = "";
       $user_name = $_POST["Name"];
-      $password = $_POST["Password"];
+      $password = md5($_POST["Password"]);
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //If name is empty throw error
         if (empty($_POST["Name"])) {

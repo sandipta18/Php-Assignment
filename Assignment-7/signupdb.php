@@ -21,7 +21,7 @@ if (!$link) {
     $count = mysqli_num_rows($duplicate);
     
     if($count>0){
-      $_SESSION['checker'] = 1;
+      $_SESSION['account'] = true;
       header('location:signup.php');
       
     }
@@ -32,7 +32,6 @@ if (!$link) {
     $result = mysqli_query($link,$sql);
     
     if($result){
-      // echo "<script> alert ('Account Created'); </script>";
       $_SESSION['account'] = true;
       header('location:index.php');
     }

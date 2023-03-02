@@ -84,12 +84,8 @@ $good = 1;
 			echo "<script> alert ('Wrong Email'); </script>";
 			$good = 0;
 		}
-		
-        
-		if($_SESSION['checker']==1){
-			$error = "Alredy Exists";
-			
-			
+		if($_SESSION['account'] == true){
+			echo "<script> alert ('Already Exist'); </script>";
 		}
 		if($good == 1){
 		header('location:signupdb.php');

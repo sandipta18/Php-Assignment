@@ -9,7 +9,7 @@
 </div>
 <script>
     function countdown() {
-        var seconds = 120;
+        var seconds = 59;
         function tick() {
           var counter = document.getElementById("counter");
           seconds--;
@@ -19,17 +19,7 @@
             setTimeout(tick, 1000);
           }
            else {
-            document.getElementById("verifiBtn").innerHTML = `
-                <div class="Btn" id="ResendBtn">
-                    <button type="submit">Resend OTP</button>
-                    
-                </div>
-            `;
-            document.getElementById("counter").innerHTML = "";
-            document.getElementById('ResendBtn').onclick = function(){
-                location.href="validate_otp.php";
-            };
-            
+            window.location.href = 'forgot.php';
             
           }
         }
