@@ -151,6 +151,13 @@ if($_SESSION['set']==FALSE){
 </head>
 <body>
 <ul class="menu cf">
+<li><a href="#">
+  <?php 
+   if (isset($_SESSION['name'])) {
+    echo "Welcome " . $_SESSION['name'];
+  }
+  ?>
+</a></li>
 <li><a href="../Assignment-7/action.php">Go Back</a></li>
 <li><a href="https://github.com/sandipta18/Php-Assignment">Repo Link</a></li>
 <li><a href="../Assignment-1/index.php">Task 1</a></li>
@@ -159,7 +166,6 @@ if($_SESSION['set']==FALSE){
 <li><a href="../Assignment-4/index.php">Task 4</a></li>
 <li><a href="../Assignment-5/index.php">Task 5</a></li>
 <li><a href="../Assignment-6/index.php">Task 6</a></li>
-<li><a href="../Assignment-7/index.php">Task 7</a></li>
 
 <li>
         <a>OOPS</a>
