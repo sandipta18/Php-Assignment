@@ -12,7 +12,7 @@ $_SESSION['invalidemail'] = FALSE;
 $_SESSION['exists'] = TRUE;
 $_SESSION['mess'] = "";
 $_SESSION['account'] = "";
-
+$_SESSION['forgot'] = false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +42,7 @@ elseif($obj2->account_exist($_POST['mail']) == FALSE){
 }
 else{
 require 'vendor/autoload.php';
-
+  $_SESSION['forgot'] = true;
   $mail = new PHPMailer(true);
   $mail->isSMTP();
   $mail->Host = 'smtp.gmail.com';

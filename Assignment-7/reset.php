@@ -1,5 +1,8 @@
 <?php session_start();
 include 'loadin.php';
+if( $_SESSION['forgot'] == false){
+  header('location:forgot.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

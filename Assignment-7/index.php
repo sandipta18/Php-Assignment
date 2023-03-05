@@ -54,6 +54,7 @@ include 'loadin.php';
             echo $_SESSION['password_change_success'];
             $_SESSION['password_change_success'] = "";
             session_unset($_SESSION['password_changed']);
+            session_unset($_SESSION['forgot']);
           }
         }
         elseif(isset($_SESSION['account'])){
@@ -61,7 +62,6 @@ include 'loadin.php';
         echo $_SESSION['account_created'];
         $_SESSION['account_created'] = "";
         session_unset($_SESSION['account']);
-        echo $_SESSION['account'];
 
          }
         }

@@ -1,7 +1,9 @@
 <!-- Otp entered will be validated in this page -->
 <?php
 session_start();
-
+if( $_SESSION['forgot'] == false){
+    header('location:forgot.php');
+}
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
