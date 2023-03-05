@@ -28,7 +28,9 @@ include 'loadin.php';
         if (isset($_SESSION['name'])) {
           echo $_SESSION['name'];
         }
-          ?></h2>
+          ?>
+        </h2>
+        <!-- This branch of section will contain the links of other tasks -->
         <div class="link-1">
           <a href="../Assignment-1/index.php">
             <span class="thin">Task</span><span class="thick">~1</span>
@@ -89,7 +91,7 @@ include 'loadin.php';
 
     </div>
   </div>
-
+  <?php include 'popup.html'; ?>
 </body>
 
 </html>

@@ -65,3 +65,12 @@ a{
 .show{
     transform: translate(141px, -38px);
 }
+.success{
+    padding-top: 5px;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    font-size: 18px;
+    color: green;
+    font-weight: bolder;
+}

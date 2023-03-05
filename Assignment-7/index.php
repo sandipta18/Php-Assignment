@@ -23,7 +23,7 @@ include 'loadin.php';
 
 
   <?php
-  
+
   $obj = new Login();
   $temp = $obj->validate_login();
   ?>
@@ -31,16 +31,42 @@ include 'loadin.php';
   <div class="container flex-wrapper">
     <div class="form-section flex-wrapper -vertical">
       <form action="index.php" class="flex-wrapper -vertical" method="POST">
-        <input type="text" placeholder="User Name" name="Name" class="box" required> <span class="error">
-          <?php echo $temp[2]; ?>
-        </span><br>
-        <input type="password" placeholder="Password" name="Password" class="box" id ="hidden" required><span class="error">
-          <?php echo $temp[3]; ?>
+        <input type="text" placeholder="User Name" name="Name" class="box txt" required><br>
+        <input type="password" placeholder="Password" name="Password" class="box txt" id="hidden" required><span class="error">
         </span><i class="fa-sharp fa-solid fa-eye show" onclick="show_pass()"></i>
         <input type="submit" value="Login" class="box-submit" name="submit">
+       
       </form>
       <a href="signup.php" class="box-submit signup">Sign Up</a>
       <a href="forgot.php" class="box-submit signup">Forgot Password</a>
+      <div class="success">
+      <span class="error">
+          <?php
+          if(isset($temp[2]))
+          echo $temp[2]; 
+          $temp[2] = "";
+          ?>
+        </span>
+      <?php
+
+        if (isset($_SESSION['password_changed'])) {
+          if ($_SESSION['password_changed'] === true) {
+            echo $_SESSION['password_change_success'];
+            $_SESSION['password_change_success'] = "";
+            session_unset($_SESSION['password_changed']);
+          }
+        }
+        elseif(isset($_SESSION['account'])){
+        if($_SESSION['account'] === true){
+        echo $_SESSION['account_created'];
+        $_SESSION['account_created'] = "";
+        session_unset($_SESSION['account']);
+        echo $_SESSION['account'];
+
+         }
+        }
+        ?>
+        </div>
     </div>
   </div>
 </body>
@@ -57,23 +83,14 @@ include 'loadin.php';
       ?>
     });
 
-    $(".signup").click(function() {
-
-    })
+    $(".txt").keypress(function () {
+      $(".error").hide();
+    });
 
   });
 </script>
 
 </html>
-<?php 
+<?php
 
-if($_SESSION['account'] == true){
-  echo "<script> alert ('Account Created'); </script>";
-  session_unset($_SESSION['account']);
- }
-
-elseif($_SESSION['password_changed'] == true){
- echo "<script> alert ('Password Changed'); </script>";
- session_unset($_SESSION['password_changed']);
-}
 ?>

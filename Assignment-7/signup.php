@@ -1,10 +1,8 @@
 <?php 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
 session_start();
 require 'class.php';
 include 'loadin.php';
+include 'signupvalidate.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,6 +12,7 @@ include 'loadin.php';
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <!-- Custom Theme files -->
 <link href="css/style2.css" rel="stylesheet" type="text/css" media="all" />
 <!-- //Custom Theme files -->
@@ -29,13 +28,11 @@ include 'loadin.php';
 		<div class="main-agileinfo">
 			<div class="agileits-top">
 				<form action="signup.php" method="post">
-					<input class="text" type="text" name="username" placeholder="Username" required="">
-					<input class="text email" type="email" name="mail" placeholder="Email" required="">
-					<input class="text w3lpass" type="password" name="password" placeholder="Password" id = "hidden" required="">
+					<input class="text txt" type="text" name="username" placeholder="Username" required="">
+					<input class="text email txt" type="email" name="mail" placeholder="Email" required="">
+					<input class="text w3lpass txt" type="password" name="password" placeholder="Password" id = "hidden" required="">
 					<i class="fa-sharp fa-solid fa-eye show" onclick="show_pass()"></i>
-					<span>
-				       <?php echo $error; ?>
-					</span>
+					
 					<div class="wthree-text">
 						<label class="anim">
 							<input type="checkbox" class="checkbox" required="">
@@ -45,10 +42,34 @@ include 'loadin.php';
 					</div>
 					<input type="submit" value="SIGNUP" name="submit">
 					<a href="index.php" >Go back</a>
+					<div class = "error">
+				       <?php
+					   if(isset($error_password)){
+					    echo $error_password;
+						$error_password = "";
+					   }
+					   ?>
+					   <?php
+					   if(isset($error_email)){
+						echo $error_email;
+						$error_email = "";
+					   }
+					   ?>
+					   <?php
+					   if(isset($_SESSION['account_exists']))
+					   if($_SESSION['account_exists']== true){
+						echo $_SESSION['exists_error'];
+						$_SESSION['exists_error'] = "";
+						session_unset($_SESSION['account_exists']);
+					   }
+					   
+						?>
+					</div>
 				</form>
 				
 			</div>
 		</div>
+		
 		<ul class="colorlib-bubbles">
 			<li></li>
 			<li></li>
@@ -65,38 +86,15 @@ include 'loadin.php';
 	<!-- //main -->
 </body>
 </html>
-<?php 
-$error = "";
-$error_password = "";
-$good = 1;
-    if($_SERVER['REQUEST_METHOD']=='POST'){
-	if(isset($_POST['submit'])){
-		$obj = new validate();
-		if($obj->validate_password($_POST['password'])){
-		  $_SESSION['password'] = $_POST['password'];
-		}
-		else{
-           $error_password = "Wrong Input Value";
-		   echo "<script> alert ('Enter Password Correctly'); </script>";
-		   $good = 0;
-		}
-		$_SESSION['username'] = $_POST['username'];
-        if($obj->validate_email($_POST['mail'])){
-			$_SESSION['email'] = $_POST['mail'];
-		}
-        else{
-			echo "<script> alert ('Wrong Email'); </script>";
-			$good = 0;
-		}
-		if($_SESSION['account'] == true){
-			echo "<script> alert ('Already Exist'); </script>";
-		}
-		if($good == 1){
-		header('location:signupdb.php');
-		}
-		
-		
-	}
-}
 
-?>
+
+
+<script>
+  $(document).ready(function() {
+    $(".txt").keypress(function () {
+      $(".error").hide();
+    });
+
+  });
+</script>
+

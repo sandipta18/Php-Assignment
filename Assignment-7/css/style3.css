@@ -106,3 +106,19 @@ a{
 .show{
   transform: translate(363px, -29px);
 }
+.error{
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  font-size: 18px;
+  color:#FB1F20;
+}
+#error {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  font-size: 18px;
+  color:#FB1F20;
+  padding: 20px 30px;
+  text-align: center;
+}

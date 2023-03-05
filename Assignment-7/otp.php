@@ -1,10 +1,17 @@
+<!-- Otp will be sent using this page -->
 <?php 
+ 
 session_start();
-
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 include 'confidential.php';
+include 'class.php';
+include 'loadin.php';
+$_SESSION['invalidemail'] = FALSE;
+$_SESSION['exists'] = TRUE;
+$_SESSION['mess'] = "";
+$_SESSION['account'] = "";
 
 ?>
 <!DOCTYPE html>
@@ -16,9 +23,24 @@ include 'confidential.php';
     <title>Recovery Window</title>
 </head>
 <?php 
-
-
-
+if($_SERVER['REQUEST_METHOD']=='POST'){
+if(isset($_POST['recover-submit'])){
+if(isset($_POST['mail'])){
+$obj = new validate();
+$obj2 = new exist();
+if(!$obj->validate_email($_POST['mail'])){
+  $_SESSION['invalidemail'] = TRUE;
+  $_SESSION['mess'] = "Email ID is not valid";
+  header('location:forgot.php');
+  
+  
+}
+elseif($obj2->account_exist($_POST['mail']) == FALSE){
+  $_SESSION['exists'] = FALSE;
+  $_SESSION['account'] = "Account doesnot exist";
+  header('location:forgot.php');
+}
+else{
 require 'vendor/autoload.php';
 
   $mail = new PHPMailer(true);
@@ -39,7 +61,10 @@ require 'vendor/autoload.php';
   $_SESSION['otp'] = $otp;
   $_SESSION['email'] = $_POST['mail'];
   header('location:validate_otp.php');
-
+}
+}
+}
+}
 ?>
 
 </html>

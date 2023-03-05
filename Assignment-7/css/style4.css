@@ -10,3 +10,14 @@ a:hover{
     color: white;
     text-decoration: none;
 }
+.error{
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  font-size: 18px;
+  color:#FB1F20;
+}
+.container{
+  transform: translateX(-41%);
+  width: 2400px;
+}

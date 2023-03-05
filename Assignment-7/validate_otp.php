@@ -1,3 +1,4 @@
+<!-- Otp entered will be validated in this page -->
 <?php
 session_start();
 
@@ -7,6 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 include 'loadin.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

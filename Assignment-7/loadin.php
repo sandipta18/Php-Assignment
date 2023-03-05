@@ -1,3 +1,4 @@
+<!-- Loading Animation -->
 <!DOCTYPE html>
 <html lang="en">
 

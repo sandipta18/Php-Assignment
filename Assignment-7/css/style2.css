@@ -883,3 +883,10 @@ form{
 .show{
   transform: translate(286px, -57px);
 }
+.error{
+  color:red;
+  font-weight: bold;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
