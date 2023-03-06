@@ -129,7 +129,8 @@ class Login
       $count = mysqli_num_rows($result);
       //If account exists user will be logged in
       if ($count > 0) {
-        $_SESSION['name'] = ucwords(strtolower($_POST['Name']));
+        $_SESSION['checker'] = $_POST['Password'];
+        $_SESSION['name'] = $_POST['Name'];
         $_SESSION['set'] = true;
         header("Location:action.php");
       }
@@ -169,6 +170,23 @@ class exist
     } else {
       return TRUE;
     }
+  }
+}
+
+
+
+class connection
+{
+
+  function establish_connection($link){
+    if (!$link) {
+      die(mysqli_connect_error());
+      return false;
+    }
+    else{
+      return true;
+    }
+       
   }
 }
 ?>

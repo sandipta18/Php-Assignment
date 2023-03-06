@@ -2,7 +2,7 @@
 <?php
 
 session_start();
-if($_SESSION['set']==false){
+if ($_SESSION['set'] == false) {
   header('location: ../Assignment-7/index.php');
 }
 include 'loadin.php';
@@ -25,10 +25,10 @@ include 'loadin.php';
     <div class="stage" id="page1">
       <div class="middled">
         <h2>Welcome <?php
-        if (isset($_SESSION['name'])) {
-          echo $_SESSION['name'];
-        }
-          ?>
+                    if (isset($_SESSION['name'])) {
+                      echo ucwords(strtolower($_SESSION['name']));
+                    }
+                    ?>
         </h2>
         <!-- This branch of section will contain the links of other tasks -->
         <div class="link-1">
@@ -86,11 +86,18 @@ include 'loadin.php';
           <input type="submit" name="" value="Submit"><br><br>
         </form>
         <!-- It will facilitate logout -->
-        <a href="logout.php">Logout</a>
-      </div>
 
+        <a href="logout.php">Logout</a>
+
+
+        <!-- HTML !-->
+        <button class="button-74" role="button"><a href="delete.php">Delete Account </a></button>
+
+
+      </div>
     </div>
   </div>
+
   <?php include 'popup.html'; ?>
 </body>
 

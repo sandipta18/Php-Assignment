@@ -53,18 +53,27 @@ include 'loadin.php';
           if ($_SESSION['password_changed'] === true) {
             echo $_SESSION['password_change_success'];
             $_SESSION['password_change_success'] = "";
-            session_unset($_SESSION['password_changed']);
-            session_unset($_SESSION['forgot']);
+            unset($_SESSION['password_changed']);
+            unset($_SESSION['forgot']);
           }
         }
-        elseif(isset($_SESSION['account'])){
-        if($_SESSION['account'] === true){
-        echo $_SESSION['account_created'];
-        $_SESSION['account_created'] = "";
-        session_unset($_SESSION['account']);
-
-         }
+        if(isset($_SESSION['account'])){
+          if($_SESSION['account'] === true){
+          echo $_SESSION['account_created'];
+          $_SESSION['account_created'] = "";
+          unset($_SESSION['account']);
+          unset($_SESSION['account_created']);
+  
+          }
+          }
+        if(isset($_SESSION['account_delete'])){
+        if($_SESSION['account_delete'] == true){
+         echo $_SESSION['deletemessage'];
+         $_SESSION['delemessage'] = "";
+         unset($_SESSION['account_delete']);
+         unset($_SESSIOn['delemessage']);
         }
+      }
         ?>
         </div>
     </div>
