@@ -1,15 +1,15 @@
 <!-- Otp entered will be validated in this page -->
 <?php
 session_start();
-if( $_SESSION['forgot'] == false){
+if ($_SESSION['forgot'] == false) {
     header('location:forgot.php');
 }
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 
+// coexisting the vendor autoloader
 require 'vendor/autoload.php';
-include 'loadin.php';
+// This document facilitates the loading animation
+require 'loadin.php';
 
 ?>
 <!DOCTYPE html>
@@ -28,8 +28,6 @@ include 'loadin.php';
     <div class="container">
         <div class="items">
             <i class="fa fa-key icon_otp" aria-hidden="true"></i>
-            <!-- <h2 class="otp">Enter OTP</h2> -->
-            <!-- <p id="demo"></p> -->
             <div class="wrapper">
                 <div class="typing-demo">
                     Enter OTP
@@ -52,6 +50,9 @@ include 'loadin.php';
             </form>
             <div class="timer-icon">
                 <?php
+                // this document has a timer and it will redirect the user
+                // to the reset page if otp is not entered withing one 
+                // minute
                 include 'timer.php';
                 ?>
             </div>
@@ -61,9 +62,12 @@ include 'loadin.php';
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // If otp matches heading down to the rest page
     if ($_POST['otp'] == $_SESSION['otp']) {
         header('location:reset.php');
-    } else {
+    }
+    // else throwing an error
+    else {
         echo "<script> alert ('Wrong OTP'); </script>";
     }
 }

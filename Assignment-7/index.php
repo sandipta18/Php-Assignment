@@ -4,6 +4,8 @@
 session_start();
 include 'class.php';
 include 'loadin.php';
+include 'loginclass.php';
+include 'class accountexists.php'
 ?>
 <!DOCTYPE html>
 <html lang="en">

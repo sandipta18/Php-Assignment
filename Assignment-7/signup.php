@@ -3,6 +3,8 @@ session_start();
 require 'class.php';
 include 'loadin.php';
 include 'signupvalidate.php';
+include 'loginclass.php';
+include 'class accountexists.php'
 ?>
 <!DOCTYPE html>
 <html>

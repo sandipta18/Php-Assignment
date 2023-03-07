@@ -5,9 +5,13 @@ session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 include 'confidential.php';
 include 'class.php';
 include 'loadin.php';
+include 'class accountexists.php';
+include 'class connect.php';
+
 $_SESSION['invalidemail'] = FALSE;
 $_SESSION['exists'] = TRUE;
 $_SESSION['mess'] = "";
@@ -26,8 +30,8 @@ $_SESSION['forgot'] = false;
 if($_SERVER['REQUEST_METHOD']=='POST'){
 if(isset($_POST['recover-submit'])){
 if(isset($_POST['mail'])){
-$obj = new validate();
-$obj2 = new exist();
+$obj = new Validate();
+$obj2 = new Exist();
 if(!$obj->validate_email($_POST['mail'])){
   $_SESSION['invalidemail'] = TRUE;
   $_SESSION['mess'] = "Email ID is not valid";
