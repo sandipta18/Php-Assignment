@@ -21,7 +21,7 @@ include 'loadin.php';
         <input type="password" class="email" name="deletepass" placeholder="Enter Password to verify" required>
         <span class="error">
             <?php
-            if ($_SESSION['passvalidate'] == false) {
+            if (!$_SESSION['passvalidate']) {
                 echo $_SESSION['wrongpass'];
                 $_SESSION['wrongpass'] = "";
             }

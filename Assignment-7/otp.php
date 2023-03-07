@@ -27,7 +27,7 @@ $_SESSION['forgot'] = false;
     <title>Recovery Window</title>
 </head>
 <?php 
-if($_SERVER['REQUEST_METHOD']=='POST'){
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
 if(isset($_POST['recover-submit'])){
 if(isset($_POST['mail'])){
 $obj = new Validate();

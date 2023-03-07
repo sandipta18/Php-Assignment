@@ -5,8 +5,7 @@
 /**
  * @method account_exist
  */
-class Exist
-{
+class Exist {
 
   /**
    * @param mixed $email

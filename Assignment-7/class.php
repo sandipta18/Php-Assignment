@@ -1,7 +1,7 @@
 <?php
+
+//It will facilitate validaint the email id using api
 require_once '../vendor/autoload.php';
-
-
 use GuzzleHttp\Client;
 
 
@@ -11,7 +11,7 @@ use GuzzleHttp\Client;
  * @method validate_email
  * 
  */
-class Validate{
+class Validate {
   /*
     Regular Expression: $\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$
     $ = beginning of string

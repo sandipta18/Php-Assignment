@@ -2,7 +2,7 @@
 /**
  * @method establist_connection
  */
-class Connection{
+class Connection {
 
   /**
    * 

@@ -1,7 +1,7 @@
 <?php  
 session_start();
 
-//consists information about database
+// Consists information about database.
 require 'databaseinfo.php';
 
 $_SESSION['account'] = false;
