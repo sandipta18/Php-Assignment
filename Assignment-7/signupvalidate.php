@@ -1,4 +1,5 @@
 <?php 
+
 $error = "";
 $error_password = "";
 $error_email = "";
@@ -6,7 +7,7 @@ $error_account = "";
 $good = 1;
 if($_SERVER['REQUEST_METHOD']=='POST'){
 if(isset($_POST['submit'])){
-	$obj = new validate();
+	$obj = new Validate();
 	if($obj->validate_password($_POST['password'])){
 	  $_SESSION['password'] = $_POST['password'];
 	}
